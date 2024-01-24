@@ -1,0 +1,493 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0AAAAD2B45CBA000A4CC59 /* PriceAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */; };
+		AA27D60C2B4448F600453A29 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27D60B2B4448F600453A29 /* CoinManager.swift */; };
+		AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27D60F2B447B6E00453A29 /* CoinData.swift */; };
+		AA559C5C2B5D3F7A00D5C432 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5B2B5D3F7A00D5C432 /* WelcomeViewController.swift */; };
+		AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */; };
+		AA559C602B5D43B200D5C432 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */; };
+		AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F6482B433F4500D3727B /* AppDelegate.swift */; };
+		AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */; };
+		AAC2F64D2B433F4500D3727B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64C2B433F4500D3727B /* ViewController.swift */; };
+		AAC2F6502B433F4500D3727B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAC2F64E2B433F4500D3727B /* Main.storyboard */; };
+		AAC2F6522B433F4600D3727B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC2F6512B433F4600D3727B /* Assets.xcassets */; };
+		AAC2F6552B433F4600D3727B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAC2F6532B433F4600D3727B /* LaunchScreen.storyboard */; };
+		D0DB3A650EF5B934313DAC3A /* Pods_CoinCaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58600E4A929F0FE410563F7C /* Pods_CoinCaster.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		58600E4A929F0FE410563F7C /* Pods_CoinCaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoinCaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceAlertViewController.swift; sourceTree = "<group>"; };
+		AA27D60B2B4448F600453A29 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
+		AA27D60F2B447B6E00453A29 /* CoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinData.swift; sourceTree = "<group>"; };
+		AA559C5A2B4F584D00D5C432 /* CoinCaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoinCaster.entitlements; sourceTree = "<group>"; };
+		AA559C5B2B5D3F7A00D5C432 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AAC2F6452B433F4500D3727B /* CoinCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAC2F6482B433F4500D3727B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		AAC2F64C2B433F4500D3727B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AAC2F64F2B433F4500D3727B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AAC2F6512B433F4600D3727B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AAC2F6542B433F4600D3727B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AAC2F6562B433F4600D3727B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F67EFAB53983011135FE6D7B /* Pods-CoinCaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinCaster.release.xcconfig"; path = "Target Support Files/Pods-CoinCaster/Pods-CoinCaster.release.xcconfig"; sourceTree = "<group>"; };
+		FE7A537F33520D1B5AB1FB49 /* Pods-CoinCaster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinCaster.debug.xcconfig"; path = "Target Support Files/Pods-CoinCaster/Pods-CoinCaster.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAC2F6422B433F4500D3727B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0DB3A650EF5B934313DAC3A /* Pods_CoinCaster.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0AAAA92B45949E00A4CC59 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AA559C5B2B5D3F7A00D5C432 /* WelcomeViewController.swift */,
+				AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */,
+				AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */,
+				AAC2F64C2B433F4500D3727B /* ViewController.swift */,
+				AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AA27D60D2B44490300453A29 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AAC2F64E2B433F4500D3727B /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA27D60E2B44492900453A29 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA27D60B2B4448F600453A29 /* CoinManager.swift */,
+				AA27D60F2B447B6E00453A29 /* CoinData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AAB9DA4B2EDCF5488371F31D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58600E4A929F0FE410563F7C /* Pods_CoinCaster.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AAC2F63C2B433F4400D3727B = {
+			isa = PBXGroup;
+			children = (
+				AAC2F6472B433F4500D3727B /* CoinCaster */,
+				AAC2F6462B433F4500D3727B /* Products */,
+				EE878A1C4B467BA482B94FA1 /* Pods */,
+				AAB9DA4B2EDCF5488371F31D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AAC2F6462B433F4500D3727B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAC2F6452B433F4500D3727B /* CoinCaster.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAC2F6472B433F4500D3727B /* CoinCaster */ = {
+			isa = PBXGroup;
+			children = (
+				AA559C5A2B4F584D00D5C432 /* CoinCaster.entitlements */,
+				AAC2F6482B433F4500D3727B /* AppDelegate.swift */,
+				AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */,
+				AA27D60E2B44492900453A29 /* Models */,
+				AA27D60D2B44490300453A29 /* Views */,
+				AA0AAAA92B45949E00A4CC59 /* Controllers */,
+				AAC2F6512B433F4600D3727B /* Assets.xcassets */,
+				AAC2F6532B433F4600D3727B /* LaunchScreen.storyboard */,
+				AAC2F6562B433F4600D3727B /* Info.plist */,
+			);
+			path = CoinCaster;
+			sourceTree = "<group>";
+		};
+		EE878A1C4B467BA482B94FA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FE7A537F33520D1B5AB1FB49 /* Pods-CoinCaster.debug.xcconfig */,
+				F67EFAB53983011135FE6D7B /* Pods-CoinCaster.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAC2F6442B433F4500D3727B /* CoinCaster */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAC2F6592B433F4600D3727B /* Build configuration list for PBXNativeTarget "CoinCaster" */;
+			buildPhases = (
+				C8A8F57D24688EFFC79B238E /* [CP] Check Pods Manifest.lock */,
+				AAC2F6412B433F4500D3727B /* Sources */,
+				AAC2F6422B433F4500D3727B /* Frameworks */,
+				AAC2F6432B433F4500D3727B /* Resources */,
+				9FFEFE5258741FE6EB5A3669 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoinCaster;
+			productName = CoinCaster;
+			productReference = AAC2F6452B433F4500D3727B /* CoinCaster.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAC2F63D2B433F4400D3727B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					AAC2F6442B433F4500D3727B = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = AAC2F6402B433F4400D3727B /* Build configuration list for PBXProject "CoinCaster" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AAC2F63C2B433F4400D3727B;
+			productRefGroup = AAC2F6462B433F4500D3727B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAC2F6442B433F4500D3727B /* CoinCaster */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AAC2F6432B433F4500D3727B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAC2F6552B433F4600D3727B /* LaunchScreen.storyboard in Resources */,
+				AAC2F6522B433F4600D3727B /* Assets.xcassets in Resources */,
+				AAC2F6502B433F4500D3727B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9FFEFE5258741FE6EB5A3669 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoinCaster/Pods-CoinCaster-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoinCaster/Pods-CoinCaster-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoinCaster/Pods-CoinCaster-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8A8F57D24688EFFC79B238E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoinCaster-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAC2F6412B433F4500D3727B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA559C602B5D43B200D5C432 /* LoginViewController.swift in Sources */,
+				AA27D60C2B4448F600453A29 /* CoinManager.swift in Sources */,
+				AAC2F64D2B433F4500D3727B /* ViewController.swift in Sources */,
+				AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */,
+				AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */,
+				AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */,
+				AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */,
+				AA0AAAAD2B45CBA000A4CC59 /* PriceAlertViewController.swift in Sources */,
+				AA559C5C2B5D3F7A00D5C432 /* WelcomeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AAC2F64E2B433F4500D3727B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAC2F64F2B433F4500D3727B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AAC2F6532B433F4600D3727B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAC2F6542B433F4600D3727B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AAC2F6572B433F4600D3727B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AAC2F6582B433F4600D3727B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AAC2F65A2B433F4600D3727B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE7A537F33520D1B5AB1FB49 /* Pods-CoinCaster.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CoinCaster/CoinCaster.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F33ZWMHUQP;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoinCaster/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.onyiesu.coincaster;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AAC2F65B2B433F4600D3727B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F67EFAB53983011135FE6D7B /* Pods-CoinCaster.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CoinCaster/CoinCaster.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F33ZWMHUQP;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoinCaster/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.onyiesu.coincaster;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAC2F6402B433F4400D3727B /* Build configuration list for PBXProject "CoinCaster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAC2F6572B433F4600D3727B /* Debug */,
+				AAC2F6582B433F4600D3727B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAC2F6592B433F4600D3727B /* Build configuration list for PBXNativeTarget "CoinCaster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAC2F65A2B433F4600D3727B /* Debug */,
+				AAC2F65B2B433F4600D3727B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAC2F63D2B433F4400D3727B /* Project object */;
+}
