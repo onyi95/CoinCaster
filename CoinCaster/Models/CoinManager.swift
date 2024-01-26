@@ -83,49 +83,103 @@ struct CoinManager {
         
     }
     
-    func registerUser(email: String, password: String) {
-        let url = URL(string: "https://protected-scrubland-77734.herokuapp.com/register_user")!
+    func registerUser(email: String, password: String, completion: @escaping (Bool) -> Void) {
+        let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_user")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let body: [String: Any] = [
             "email": email,
             "password": password
         ]
-        
+
         if let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) {
             print("Sending JSON: \(String(data: jsonBody, encoding: .utf8) ?? "Invalid JSON")")
             request.httpBody = jsonBody
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     print("Error occurred during registration: \(error?.localizedDescription ?? "Unknown error")")
+                    completion(false)
                     return
                 }
-                
-                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 {
-                    do {
-                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                           let userId = json["user_id"] as? Int {
-                            let keychain = KeychainSwift()
-                            keychain.set(String(userId), forKey: "userId")
-                            print("Received user ID: \(userId)")
-                        }
-                    } catch {
-                        print("Error parsing the JSON data")
+
+                if let httpResponse = response as? HTTPURLResponse {
+                    switch httpResponse.statusCode {
+                    case 201:
+                        // Handle successful registration
+                        self.handleSuccessfulRegistration(with: data)
+                        completion(true)
+                    case 409:
+                        // Handle duplicate email registration
+                        completion(false)
+                        print("This email is already in use. Please use a different email.")
+                    default:
+                        // Handle other statuses
+                        print("Failed to register user: \(httpResponse.statusCode)")
                     }
-                } else {
-                    print("Failed to register user")
                 }
             }
-            
+
             task.resume()
         }
     }
+
+    private func handleSuccessfulRegistration(with data: Data) {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let userId = json["user_id"] as? Int {
+                let keychain = KeychainSwift()
+                keychain.set(String(userId), forKey: "userId")
+                print("Received user ID: \(userId)")
+            }
+        } catch {
+            print("Error parsing the JSON data")
+        }
+    }
+
+    
+    func loginUser(email: String, password: String) {
+        let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/login")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "email": email,
+            "password": password
+        ]
+
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error occurred during login: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                       let userId = json["user_id"] as? Int {
+                        UserDefaults.standard.set(userId, forKey: "userId")
+                        print("Login successful. User ID: \(userId)")
+                    }
+                } catch {
+                    print("Error parsing the JSON data")
+                }
+            } else {
+                print("Login failed")
+            }
+        }
+
+        task.resume()
+    }
+
         
         
         func sendDeviceTokenToServer(token: String) {
-            let url = URL(string: "https://protected-scrubland-77734.herokuapp.com/register_token")!
+            let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_token")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -155,7 +209,7 @@ struct CoinManager {
         }
         
         func sendTargetPriceToServer(userId: String, targetPrice: Double) {
-            let url = URL(string: "https://protected-scrubland-77734.herokuapp.com/update_alert")!
+            let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/update_alert")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
