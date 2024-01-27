@@ -18,6 +18,22 @@ protocol PriceUpdaterDelegate {
 //why do we use a struct here instead of a class?
 //Structs are simpler and support immutability, as we dont want to accidentally change the data in our array from another view controller for example. We also don't need any inheritance, we simply want to store bits of information in the same location for a cleaner code and easy access to
 
+enum RegistrationError: Error {
+    case networkError(String)
+    case emailAlreadyInUse
+    case other(Int)
+    case noData
+}
+
+enum LoginError: Error {
+    case networkError(String)
+    case invalidCredentials
+    case other(Int)
+    case noData
+}
+
+
+
 struct CoinManager {
     
     static let shared = CoinManager() //shared instance
@@ -83,49 +99,58 @@ struct CoinManager {
         
     }
     
-    func registerUser(email: String, password: String, completion: @escaping (Bool) -> Void) {
+    func registerUser(email: String, password: String, completion: @escaping (Result<Int, RegistrationError>) -> Void) {
         let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_user")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let body: [String: Any] = [
             "email": email,
             "password": password
         ]
-
+        
         if let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) {
             print("Sending JSON: \(String(data: jsonBody, encoding: .utf8) ?? "Invalid JSON")")
             request.httpBody = jsonBody
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    print("Error occurred during registration: \(error?.localizedDescription ?? "Unknown error")")
-                    completion(false)
+                //check if an error occured
+                if let error = error {
+                    //map error ro a custom error type
+                    completion(.failure(.networkError(error.localizedDescription)))
                     return
                 }
-
-                if let httpResponse = response as? HTTPURLResponse {
-                    switch httpResponse.statusCode {
-                    case 201:
-                        // Handle successful registration
-                        self.handleSuccessfulRegistration(with: data)
-                        completion(true)
-                    case 409:
-                        // Handle duplicate email registration
-                        completion(false)
-                        print("This email is already in use. Please use a different email.")
-                    default:
-                        // Handle other statuses
-                        print("Failed to register user: \(httpResponse.statusCode)")
+                
+                
+                //cast the response to HTTPURLResponse to access the status codes
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    completion(.failure(.other(0)))
+                    return
+                }
+                switch httpResponse.statusCode {
+                case 201:
+                    guard let data = data, !data.isEmpty else {
+                        completion(.failure(.noData))
+                        return
                     }
+                    self.handleSuccessfulRegistration(with: data)
+                    completion(.success(httpResponse.statusCode))
+                case 409:
+                    print("This email is already in use. Please use a different email.")
+                    completion(.failure(.emailAlreadyInUse))
+                default:
+                    print("Failed to register user: \(httpResponse.statusCode)")
+                    completion(.failure(.other(httpResponse.statusCode)))
                 }
             }
-
+            
             task.resume()
         }
     }
-
-    private func handleSuccessfulRegistration(with data: Data) {
+    
+    func handleSuccessfulRegistration(with data: Data) {
+        // Process the data from successful registration
+        // Extracting the user ID and saving it
         do {
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                let userId = json["user_id"] as? Int {
@@ -137,30 +162,60 @@ struct CoinManager {
             print("Error parsing the JSON data")
         }
     }
-
     
-    func loginUser(email: String, password: String) {
+    func loginUser(email: String, password: String, completion: @escaping (Result<Int, LoginError>) -> Void) {
         let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/login")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let body: [String: Any] = [
             "email": email,
             "password": password
         ]
-
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-
+        
+        if let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []){
+            print("Sending JSON: \(String(data: jsonBody, encoding: .utf8) ?? "Invalid JSON")")
+            request.httpBody = jsonBody
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error occurred during login: \(error?.localizedDescription ?? "Unknown error")")
+            if let error = error {
+                //map error ro a custom error type
+                completion(.failure(.networkError(error.localizedDescription))) //THINK OF MERGING THE TWO ENUMS
                 return
             }
+            
+            //cast the response to HTTPURLResponse to access the status codes
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(.other(0)))
+                return
+            }
+            switch httpResponse.statusCode {
+            case 200:
+                guard let data = data, !data.isEmpty else {
+                    completion(.failure(.noData))
+                    return
+                }
+                self.handleSuccessfulLogin(with: data)
+                completion(.success(httpResponse.statusCode))
+            case 401:
+                print("Invalid email or password")
+                completion(.failure(.invalidCredentials))
+            default:
+                print("Login failed: \(httpResponse.statusCode)")
+                completion(.failure(.other(httpResponse.statusCode)))
+            }
+        }
+        
+        task.resume()
+    }
+}
 
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+func handleSuccessfulLogin(with data: Data) {
+    // Process the data from successful login
+    // Extracting the user ID and saving it
+    do {
+        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                        let userId = json["user_id"] as? Int {
                         UserDefaults.standard.set(userId, forKey: "userId")
                         print("Login successful. User ID: \(userId)")
@@ -168,15 +223,7 @@ struct CoinManager {
                 } catch {
                     print("Error parsing the JSON data")
                 }
-            } else {
-                print("Login failed")
-            }
-        }
-
-        task.resume()
-    }
-
-        
+}
         
         func sendDeviceTokenToServer(token: String) {
             let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_token")!

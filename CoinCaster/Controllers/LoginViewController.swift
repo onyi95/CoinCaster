@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
 
         else {
             
-            let alert = UIAlertController(title: "Error", message: "Fields cannot be empty", preferredStyle: .alert)
+            let alert = UIAlertController(title: "We need your details please", message: "Fields cannot be empty", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             
@@ -37,8 +37,42 @@ class LoginViewController: UIViewController {
             return
         }
         
-        coinManager.loginUser(email: email, password: password)
+        coinManager.loginUser(email: email, password: password) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let statusCode):
+                    if statusCode == 200 {
+                        self.performSegue(withIdentifier: segues.loginSegue, sender: self)
+                    }
+                case .failure(let loginError):
+                    var errorMessage = "An unexpected error occurred. Please try again."
+                    switch loginError {
+                    case .networkError(let description):
+                        errorMessage = description
+                        self.showAlert(withTitle: "Error", message: errorMessage)
+                    case .invalidCredentials:
+                        errorMessage = "Invalid email or password. Please enter correct details or register."
+                        self.showAlert(withTitle: "Have you registered?", message: errorMessage)
+                    case .other:
+                        errorMessage = "Login failed. Please try again."
+                        self.showAlert(withTitle: "Something went wrong..", message: errorMessage)
+                    case .noData:
+                        errorMessage = "Login failed. Please try again."
+                        self.showAlert(withTitle: "Something went wrong..", message: errorMessage)
+                    }
+                }
+            }
+        }
+        
         
     }
-    
+    //helper function to present alert
+    func showAlert(withTitle title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            self.emailTextField.text = ""
+            self.passwordTextField.text = ""
+        })
+        self.present(alert, animated: true)
+    }
 }

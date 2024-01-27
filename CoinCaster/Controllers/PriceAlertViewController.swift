@@ -32,6 +32,8 @@ class PriceAlertViewController: UIViewController {
               return
         }
         checkForPermission()
+        
+        
     }
     
 //Request notification permissions

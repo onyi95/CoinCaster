@@ -171,6 +171,12 @@
                                     <action selector="loginPressed:" destination="OX4-Rf-koW" eventType="touchUpInside" id="MPX-G3-KJQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plm-Iu-po2">
+                                <rect key="frame" x="116" y="347" width="160" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Forgot password?"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zgF-GS-Cna"/>
                         <color key="backgroundColor" systemColor="systemGrayColor"/>

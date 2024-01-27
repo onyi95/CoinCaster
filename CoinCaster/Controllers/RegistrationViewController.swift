@@ -31,7 +31,7 @@ class RegistrationViewController: UIViewController {
               let retypePassword = retypePasswordTextField.text, !retypePassword.isEmpty
         else{
             
-            let alert = UIAlertController(title: "Error", message: "Fields cannot be empty", preferredStyle: .alert)
+            let alert = UIAlertController(title: "We need your details please", message: "Fields cannot be empty", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             
@@ -41,24 +41,36 @@ class RegistrationViewController: UIViewController {
         }
         
         if password == retypePassword {
-            
-            coinManager.registerUser(email: email, password: password) { success in
+            coinManager.registerUser(email: email, password: password) { result in
                 DispatchQueue.main.async {
-                    if success {
-                        // Perform the segue only if the registration was successful
-                        self.performSegue(withIdentifier: segues.registerSegue, sender: self)
-                    } else {
-                        // Show an error message if registration failed
-                        let alert = UIAlertController(title: "Registration Failed", message: "This email is already in use. Please use a different email", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(alert, animated: true)
+                    switch result {
+                    case .success(let statusCode):
+                        if statusCode == 201 {
+                            self.performSegue(withIdentifier: segues.registerSegue, sender: self)
+                        }
+                    case .failure(let registrationError):
+                        var errorMessage = "An unexpected error occurred. Please try again."
+                        switch registrationError {
+                        case .networkError(let description):
+                            errorMessage = description
+                            self.showAlert(withTitle: "Error", message: errorMessage)
+                        case .emailAlreadyInUse:
+                            errorMessage = "Email already registered. Please log in."
+                            self.showAlert(withTitle: "Already Registered?", message: errorMessage)
+                        case .other:
+                            errorMessage = "Failed to register user. Please try again."
+                            self.showAlert(withTitle: "Something went wrong..", message: errorMessage)
+                        case .noData:
+                            errorMessage = "Failed to Register user. Please try again."
+                            self.showAlert(withTitle: "Something went wrong..", message: errorMessage)
+                        }
                     }
                 }
             }
             
         } else {
             
-            let alert = UIAlertController(title: "Error", message: "Passwords do not match", preferredStyle: .alert)
+            let alert = UIAlertController(title: "It's ok, we all make mistakes..", message: "Passwords do not match", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default ) { _ in
                 
@@ -71,6 +83,15 @@ class RegistrationViewController: UIViewController {
         }
         
     }
-    
+
+    // Helper function to present alerts
+    func showAlert(withTitle title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            self.passwordTextField.text = ""
+            self.retypePasswordTextField.text = ""
+        })
+        self.present(alert, animated: true)
+    }
 
 }
