@@ -14,6 +14,7 @@
 		AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */; };
 		AA559C602B5D43B200D5C432 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */; };
 		AA559C622B63E29100D5C432 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C612B63E29100D5C432 /* Constants.swift */; };
+		AA559C642B6A51C400D5C432 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C632B6A51C400D5C432 /* UserSessionManager.swift */; };
 		AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F6482B433F4500D3727B /* AppDelegate.swift */; };
 		AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */; };
 		AAC2F64D2B433F4500D3727B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64C2B433F4500D3727B /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AA559C612B63E29100D5C432 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AA559C632B6A51C400D5C432 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
 		AAC2F6452B433F4500D3727B /* CoinCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC2F6482B433F4500D3727B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			children = (
 				AA27D60B2B4448F600453A29 /* CoinManager.swift */,
 				AA27D60F2B447B6E00453A29 /* CoinData.swift */,
+				AA559C632B6A51C400D5C432 /* UserSessionManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */,
 				AA559C622B63E29100D5C432 /* Constants.swift in Sources */,
 				AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */,
+				AA559C642B6A51C400D5C432 /* UserSessionManager.swift in Sources */,
 				AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */,
 				AA0AAAAD2B45CBA000A4CC59 /* PriceAlertViewController.swift in Sources */,
 				AA559C5C2B5D3F7A00D5C432 /* WelcomeViewController.swift in Sources */,

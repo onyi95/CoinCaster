@@ -6,17 +6,20 @@
 //
 
 import UIKit
+import KeychainSwift
 
 class ViewController: UIViewController {
     
     var coinManager = CoinManager()
+    var selectedCurrency: String?
+    
     
     @IBOutlet weak var bitcoinLabel: UILabel!
     
     @IBOutlet weak var currencyPicker: UIPickerView!
     
     @IBOutlet weak var currencyLabel: UILabel!
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -26,6 +29,18 @@ class ViewController: UIViewController {
         currencyPicker.delegate = self
         coinManager.delegate = self   // 3*. the ViewController conforms to the                                                PriceUpdaterDelegate and implements the required methods by                             setting itself as the delegate of an
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPriceAlert" {
+            if let priceAlertViewController = segue.destination as? PriceAlertViewController {
+                priceAlertViewController.recievedUserCurrency = selectedCurrency
+            }
+        }
+    }
+    
+    @IBAction func setPriceAlertPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "showPriceAlert", sender: self)
     }
 }
     //MARK: - UIPickerView DataSource Methods
@@ -53,8 +68,12 @@ extension ViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedCurrency = coinManager.currencyArray[row]
         
-        //passing the selected currency to the CoinManager
+        //passing the selected currency to CoinManager
         coinManager.updateCoinPrice(selectedCurrency)
+        
+        //Using Direct Property Assignment to pass the selected currency to priceAlertViewController to then be sent to the backend for use in API call, when the user taps the "Turn On Notifications Button"
+        self.selectedCurrency = selectedCurrency
+
     }
 
 }
@@ -77,5 +96,35 @@ extension ViewController: PriceUpdaterDelegate {
     func didFailWithError(error: Error) {
         print(error)
     }
+    
+    //MARK: - Handle Useer Logout
+    
+    @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
+        if let user_id = KeychainSwift().get("userId"){
+            CoinManager.shared.logoutUser(withUserId: user_id) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        // Clear user-specific information
+                        KeychainSwift().delete("token")
+                        KeychainSwift().delete("userId")
+                        UserSessionManager.shared.logout() //clear logged in state on device
+                        
+                        //Navigate back to the welcome screen
+                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            if let welcomeViewController = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController {
+                                sceneDelegate.window?.rootViewController = welcomeViewController
+                            }
+                        }
+                    } else {
+                        print("Couldn't log out. Try again")
+                    }
+                }
+            }
+        } else {
+            print("User ID not found")
+        }
+        
+    }
+    
 }
-

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KeychainSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -20,14 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
+    
     //Method to handle the device token registration
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenParts = deviceToken.map {data in String(format: "%02.2hhx", data)}
         let token = tokenParts.joined()
+        let keychain = KeychainSwift()
+        keychain.set(String(token), forKey: "token")
         print("Device Token: \(token)")
-        
-        //sending the device token to the server
-        CoinManager.shared.sendDeviceTokenToServer(token: token)
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

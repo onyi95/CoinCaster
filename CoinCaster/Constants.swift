@@ -10,6 +10,7 @@ import Foundation
 struct segues {
     static let registerSegue = "registerToTrackBTC"
     static let loginSegue = "loginToTrackBTC"
+    static let welcomeSegue = "welcomeView"
 }
 
 

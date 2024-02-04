@@ -42,7 +42,16 @@ class LoginViewController: UIViewController {
                 switch result {
                 case .success(let statusCode):
                     if statusCode == 200 {
-                        self.performSegue(withIdentifier: segues.loginSegue, sender: self)
+                        //self.performSegue(withIdentifier: segues.loginSegue, sender: self)
+                        
+                        //Dismiss LoginViewController and embed ViewController in Navigation Controller
+                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            if let mainViewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
+                                let navigationController = UINavigationController(rootViewController: mainViewController)
+                                sceneDelegate.window?.rootViewController = navigationController
+                            }
+                        }
                     }
                 case .failure(let loginError):
                     var errorMessage = "An unexpected error occurred. Please try again."

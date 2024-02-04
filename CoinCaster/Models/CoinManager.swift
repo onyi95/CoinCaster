@@ -18,7 +18,7 @@ protocol PriceUpdaterDelegate {
 //why do we use a struct here instead of a class?
 //Structs are simpler and support immutability, as we dont want to accidentally change the data in our array from another view controller for example. We also don't need any inheritance, we simply want to store bits of information in the same location for a cleaner code and easy access to
 
-enum RegistrationError: Error {
+enum RegistrationError: Error, Equatable {
     case networkError(String)
     case emailAlreadyInUse
     case other(Int)
@@ -32,6 +32,9 @@ enum LoginError: Error {
     case noData
 }
 
+var currentPrice: Double?
+var userIdNo: Int!
+var selectedCurrency: String? //probably need to get it from pricealertviewcontroller
 
 
 struct CoinManager {
@@ -71,9 +74,12 @@ struct CoinManager {
                 if let safeData = data {
                     if let bitcoinPrice = parseJSON(coinData: safeData){
                         
+                        currentPrice = bitcoinPrice  //Assigning the parsed bitcoinprice to currentPrice, to use within sendTargetPriceToServer func
+                        
                         let priceString = String(format: "%.2f", bitcoinPrice)
                         
                         self.delegate?.didUpdatePrice(price: priceString, currency: currency) // Here we pass the price and currency in, so that the main thread can be updated.
+                        
                     }
                 }
             }
@@ -82,7 +88,6 @@ struct CoinManager {
             task.resume()
             
         }
-        
         
     }
     
@@ -154,6 +159,7 @@ struct CoinManager {
         do {
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                let userId = json["user_id"] as? Int {
+                userIdNo = userId //Assigning to use within sendTargetPriceToServer func if it was a new user
                 let keychain = KeychainSwift()
                 keychain.set(String(userId), forKey: "userId")
                 print("Received user ID: \(userId)")
@@ -161,6 +167,13 @@ struct CoinManager {
         } catch {
             print("Error parsing the JSON data")
         }
+        
+        if let token = KeychainSwift().get("token"),let user_id = KeychainSwift().get("userId"){
+            sendDeviceTokenToServer(token: token, userId: user_id)
+            print(user_id)
+            
+        }
+        
     }
     
     func loginUser(email: String, password: String, completion: @escaping (Result<Int, LoginError>) -> Void) {
@@ -177,85 +190,104 @@ struct CoinManager {
         if let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []){
             print("Sending JSON: \(String(data: jsonBody, encoding: .utf8) ?? "Invalid JSON")")
             request.httpBody = jsonBody
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                //map error ro a custom error type
-                completion(.failure(.networkError(error.localizedDescription))) //THINK OF MERGING THE TWO ENUMS
-                return
-            }
-            
-            //cast the response to HTTPURLResponse to access the status codes
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(.other(0)))
-                return
-            }
-            switch httpResponse.statusCode {
-            case 200:
-                guard let data = data, !data.isEmpty else {
-                    completion(.failure(.noData))
-                    return
-                }
-                self.handleSuccessfulLogin(with: data)
-                completion(.success(httpResponse.statusCode))
-            case 401:
-                print("Invalid email or password")
-                completion(.failure(.invalidCredentials))
-            default:
-                print("Login failed: \(httpResponse.statusCode)")
-                completion(.failure(.other(httpResponse.statusCode)))
-            }
-        }
-        
-        task.resume()
-    }
-}
-
-func handleSuccessfulLogin(with data: Data) {
-    // Process the data from successful login
-    // Extracting the user ID and saving it
-    do {
-        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                       let userId = json["user_id"] as? Int {
-                        UserDefaults.standard.set(userId, forKey: "userId")
-                        print("Login successful. User ID: \(userId)")
-                    }
-                } catch {
-                    print("Error parsing the JSON data")
-                }
-}
-        
-        func sendDeviceTokenToServer(token: String) {
-            let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_token")!
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            let body: [String: AnyHashable] = [
-                "token": token,
-            ]
-            
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    print("Error sending token to server: \(error?.localizedDescription ?? "Unknown error")")
+                if let error = error {
+                    //map error ro a custom error type
+                    completion(.failure(.networkError(error.localizedDescription)))
                     return
                 }
                 
-                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-                    print("HTTP Error: \(httpResponse.statusCode)")
+                //cast the response to HTTPURLResponse to access the status codes
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    completion(.failure(.other(0)))
                     return
                 }
-                
-                // Handle the success response here
-                print("Token successfully sent to server.")
+                switch httpResponse.statusCode {
+                case 200:
+                    guard let data = data, !data.isEmpty else {
+                        completion(.failure(.noData))
+                        return
+                    }
+                    self.handleSuccessfulLogin(with: data)
+                    completion(.success(httpResponse.statusCode))
+                case 401:
+                    print("Invalid email or password")
+                    completion(.failure(.invalidCredentials))
+                default:
+                    print("Login failed: \(httpResponse.statusCode)")
+                    completion(.failure(.other(httpResponse.statusCode)))
+                }
             }
             
             task.resume()
         }
+    }
+    
+    func handleSuccessfulLogin(with data: Data) {
+        // Process the data from successful login
+        // Extracting the user ID and saving it
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let userId = json["user_id"] as? Int {
+                userIdNo = userId //Assigning to use within sendTargetPriceToServer func if it was an existing user that logs in
+                let keychain = KeychainSwift()
+                keychain.set(String(userId), forKey: "userId")
+                print("Login successful. User ID: \(userId)")
+            }
+        } catch {
+            print("Error parsing the JSON data")
+        }
         
-        func sendTargetPriceToServer(userId: String, targetPrice: Double) {
+        if let token = KeychainSwift().get("token"),let user_id = KeychainSwift().get("userId"){
+            sendDeviceTokenToServer(token: token, userId: user_id)
+            print(user_id)
+            
+            UserSessionManager.shared.saveLoginState()  //Save login state on user's device
+            
+        }
+    }
+    //MARK: - Send Device Token to Server
+    func sendDeviceTokenToServer(token: String, userId: String) {
+        let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_token")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: AnyHashable] = [
+            "token": token,
+            "user_id": Int(userId)
+        ]
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error sending token to server: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+                print("HTTP Error: \(httpResponse.statusCode)")
+                return
+            }
+            
+            // Handle the success response here
+            print("Token successfully sent to server.")
+        }
+        
+        task.resume()
+    }
+    
+    //MARK: - Send Target Price to Server
+    func sendTargetPriceToServer(targetPrice: Double) {
+        //print(userIdNo)
+        guard let userId = userIdNo else {
+            print("User ID was not found")
+            return
+        }
+        
+        if currentPrice != targetPrice {
             let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/update_alert")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
@@ -270,21 +302,81 @@ func handleSuccessfulLogin(with data: Data) {
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    print("Error occurred: \(error)")
+                    print("Error occurred: \(error.localizedDescription)")
                     return
                 }
                 
                 if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
                     print("Target price sent successfully")
-                    // Handle successful response
                 } else {
                     print("Failed to send target price")
-                    // Handle failure
                 }
             }
             
             task.resume()
         }
-        
     }
+    //MARK: - Sending Logout Request to Server
+    func logoutUser(withUserId userId: String, completion: @escaping (Bool) -> Void) {
+        let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/logout")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: Any] = ["user_id": userId]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                print("Error occurred during logout: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                print("Logout successful")
+                completion(true)
+            } else {
+                print("Logout failed with response: \(String(describing: response))")
+                completion(false)
+            }
+        }
+        task.resume()
+    }
+    //MARK: - Sending User Selected Currency
+    func userSelectedCurrency(currency: String){
+        guard let userId = userIdNo else {
+            print("User ID was not found")
+            return
+        }
+        
+        let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/selected_currency")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
+        let body: [String: Any] = [
+            "user_id": userId,
+            "selected_currency": currency
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                print("Error occurred: \(error.localizedDescription)")
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                print("Selected currency sent successfully")
 
+            } else {
+                print("Failed to send Selected currency")
+            }
+            
+        }
+        task.resume()
+    }
+    
+}
