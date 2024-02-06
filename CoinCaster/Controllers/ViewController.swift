@@ -10,31 +10,27 @@ import KeychainSwift
 
 class ViewController: UIViewController {
     
-    var coinManager = CoinManager()
+    var coinManager = CoinManager.shared
     var selectedCurrency: String?
     
     
     @IBOutlet weak var bitcoinLabel: UILabel!
-    
     @IBOutlet weak var currencyPicker: UIPickerView!
-    
     @IBOutlet weak var currencyLabel: UILabel!
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         //set the ViewController.swift as the datasource and delegate for the picker
         currencyPicker.dataSource = self
         currencyPicker.delegate = self
-        coinManager.delegate = self   // 3*. the ViewController conforms to the                                                PriceUpdaterDelegate and implements the required methods by                             setting itself as the delegate of an
-        
+        coinManager.delegate = self  //the ViewController conforms to the PriceUpdaterDelegate and implements the required methods by                             setting itself as the delegate 3*
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPriceAlert" {
             if let priceAlertViewController = segue.destination as? PriceAlertViewController {
-                priceAlertViewController.recievedUserCurrency = selectedCurrency
+                priceAlertViewController.recievedUserCurrency = selectedCurrency         //Property assignment to pass the selected currency to priceAlertViewController to then be sent to the backend for use in API call, when the user taps "Turn On Notifications"
             }
         }
     }
@@ -51,15 +47,14 @@ extension ViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return coinManager.currencyArray.count  //tell Xcode how many rows this picker should
+        return coinManager.currencyArray.count  //tell Xcode how many rows this picker should have
     }
 }
 
     //MARK: - UIPickerView Delegate Methods
-// to be able to update the PickerView with some titles and detect when it is interacted with we have to set up the PickerView’s delegate methods
+    // to be able to update the PickerView with some titles and detect when it is interacted with, setting up the PickerView’s delegate methods
     
-    extension ViewController: UIPickerViewDelegate {
-    
+extension ViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return coinManager.currencyArray[row]
         //When the PickerView is loading up, it will ask its delegate for a row title and call the above method once for every row.
@@ -71,11 +66,8 @@ extension ViewController: UIPickerViewDataSource {
         //passing the selected currency to CoinManager
         coinManager.updateCoinPrice(selectedCurrency)
         
-        //Using Direct Property Assignment to pass the selected currency to priceAlertViewController to then be sent to the backend for use in API call, when the user taps the "Turn On Notifications Button"
         self.selectedCurrency = selectedCurrency
-
     }
-
 }
     
 
@@ -83,48 +75,47 @@ extension ViewController: UIPickerViewDataSource {
 
 //2*. Creating the delegate class
 extension ViewController: PriceUpdaterDelegate {
-    
     func didUpdatePrice(price: String, currency: String) {
-        
         DispatchQueue.main.async { //update the main thread
             self.bitcoinLabel.text = price
             self.currencyLabel.text = currency
         }
-        
     }
     
     func didFailWithError(error: Error) {
         print(error)
     }
-    
-    //MARK: - Handle Useer Logout
-    
+}
+//MARK: - Handle User Logout
+extension ViewController {
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
-        if let user_id = KeychainSwift().get("userId"){
-            CoinManager.shared.logoutUser(withUserId: user_id) { success in
-                DispatchQueue.main.async {
-                    if success {
-                        // Clear user-specific information
-                        KeychainSwift().delete("token")
-                        KeychainSwift().delete("userId")
-                        UserSessionManager.shared.logout() //clear logged in state on device
-                        
-                        //Navigate back to the welcome screen
-                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            if let welcomeViewController = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController {
-                                sceneDelegate.window?.rootViewController = welcomeViewController
-                            }
-                        }
-                    } else {
-                        print("Couldn't log out. Try again")
-                    }
+        guard let user_id = KeychainSwift().get("userId") else {
+            print("User ID not found")
+            return
+        }
+        CoinManager.shared.logoutUser(withUserId: user_id) { [weak self] success in
+            DispatchQueue.main.async {
+                if success {
+                    self?.clearUserDataAndNavigateToWelcomeScreen()
+                } else {
+                    print("Couldn't log out. Try again")
                 }
             }
-        } else {
-            print("User ID not found")
         }
-        
     }
     
+    private func clearUserDataAndNavigateToWelcomeScreen() {
+        // Clear user-specific information
+        KeychainSwift().delete("token")
+        KeychainSwift().delete("userId")
+        
+        //clear logged in state on device
+        UserSessionManager.shared.logout()
+        
+        //Navigate back to the welcome screen
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+           let welcomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController {
+            sceneDelegate.window?.rootViewController = welcomeViewController
+        }
+    }
 }

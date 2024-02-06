@@ -8,15 +8,6 @@
 import Foundation
 import KeychainSwift
 
-//1*. Define the protocols for updating the UI and dealing with errors (in other words, these are the responsibilities of the delegate
-protocol PriceUpdaterDelegate {
-    func didUpdatePrice(price: String, currency: String)
-    func didFailWithError(error: Error)
-}
-
-//why do we use a struct here instead of a class?
-//Structs are simpler and support immutability, as we dont want to accidentally change the data in our array from another view controller for example. We also don't need any inheritance, we simply want to store bits of information in the same location for a cleaner code and easy access to
-
 enum RegistrationError: Error, Equatable {
     case networkError(String)
     case emailAlreadyInUse
@@ -33,7 +24,6 @@ enum LoginError: Error {
 
 var currentPrice: Double?
 var userIdNo: Int!
-var selectedCurrency: String? //probably need to get it from pricealertviewcontroller
 
 
 struct CoinManager: CoinManagerProtocol {
