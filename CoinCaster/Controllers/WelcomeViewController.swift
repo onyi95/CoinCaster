@@ -8,11 +8,28 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
-    
-//Simple navigation is required, therefore storyboard is being used for segue navigation
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func createAccountPressed(_ sender: UIButton) {
+        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if let registrationViewController = segue.destination as? RegistrationViewController {
+                registrationViewController.coinManager = CoinManager() //Dependency Injection
+            }
+        }
+    }
+    
+    @IBAction func loginPressed(_ sender: UIButton) {
+        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if let loginViewController = segue.destination as? LoginViewController {
+                loginViewController.coinManager = CoinManager()
+            }
+        }
+    }
+    
+    
+    
 
 }

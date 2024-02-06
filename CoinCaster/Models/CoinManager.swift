@@ -10,7 +10,6 @@ import KeychainSwift
 
 //1*. Define the protocols for updating the UI and dealing with errors (in other words, these are the responsibilities of the delegate
 protocol PriceUpdaterDelegate {
-    
     func didUpdatePrice(price: String, currency: String)
     func didFailWithError(error: Error)
 }
@@ -37,7 +36,7 @@ var userIdNo: Int!
 var selectedCurrency: String? //probably need to get it from pricealertviewcontroller
 
 
-struct CoinManager {
+struct CoinManager: CoinManagerProtocol {
     
     static let shared = CoinManager() //shared instance
     
@@ -101,7 +100,6 @@ struct CoinManager {
             delegate?.didFailWithError(error: error) // we use the delegate methods to handle the errors here again, which is one of its benefits.
             return nil
         }
-        
     }
     
     func registerUser(email: String, password: String, completion: @escaping (Result<Int, RegistrationError>) -> Void) {

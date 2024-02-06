@@ -9,7 +9,9 @@ import UIKit
 
 class RegistrationViewController: UIViewController {
     
-    var coinManager = CoinManager()
+    var coinManager: CoinManagerProtocol! // Dependency Injection
+    var alertPresenter: AlertPresenterProtocol!
+    var navigator: NavigatorProtocol!
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -17,11 +19,13 @@ class RegistrationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Enhance security for user's data
+        configureTextFieldSecurity()
+    }
+    
+    private func configureTextFieldSecurity() {             //Enhance security for user's data
         passwordTextField.isSecureTextEntry = true
         retypePasswordTextField.isSecureTextEntry = true
     }
-    
 
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         sender.isEnabled = false // Disable the button to prevent multiple taps
@@ -29,7 +33,7 @@ class RegistrationViewController: UIViewController {
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let retypePassword = retypePasswordTextField.text, !retypePassword.isEmpty else {
-            showAlert(withTitle: "We need your details please", message: "Fields cannot be empty")
+            alertPresenter.showAlert(withTitle: "We need your details please", message: "Fields cannot be empty")
             sender.isEnabled = true // Re-enable the button before return
             return
         }
@@ -39,20 +43,21 @@ class RegistrationViewController: UIViewController {
                 guard let self = self else { return } //Weak self capture used in the closure to avoid strong reference cycles
                 DispatchQueue.main.async {
                     sender.isEnabled = true // Re-enable the button
-                    switch result {
-                    case .success(let statusCode):
-                        if statusCode == 201 {
-                            self.navigateToMainViewController()
-                        } else {
-                            self.showAlert(withTitle: "Registration Error", message: "Please try again.")
-                        }
-                    case .failure(let registrationError):
-                        self.handleRegistrationError(registrationError)
-                    }
+                    self.handleRegistrationResult(result)
                 }
             }
         } else {
-            showAlert(withTitle: "It's ok, we all make mistakes..", message: "Passwords do not match", clearTextFields: true)
+            alertPresenter.showAlert(withTitle: "It's ok, we all make mistakes..", message: "Passwords do not match")
+        }
+    }
+    
+    private func handleRegistrationResult(_ result: Result<Int, RegistrationError>) {
+        switch result {
+        case .success:
+            navigator.navigateToMainViewController()
+        case .failure(let error):
+            let errorMessage = errorMessage(for: error)
+            handleRegistrationError(error)
         }
     }
 
@@ -67,18 +72,21 @@ class RegistrationViewController: UIViewController {
         }
     }
     
-    private func handleRegistrationError(_ error: RegistrationError){
-        var errorMessage = "An unexpected error occurred. Please try again."
+    func errorMessage(for error: RegistrationError) -> String { //separate message determination for testability
         switch error {
         case .networkError(let description):
-            errorMessage = description
+            return description
         case .emailAlreadyInUse:
-            errorMessage = "Email already in use. Please log in."
+            return "Email already in use. Please log in."
         case .other:
-            errorMessage = "Failed to register user. Please try again."
+            return "Failed to register user. Please try again."
         case .noData:
-            errorMessage = "Failed to Register user. Please try again."
+            return "Failed to Register user. Please try again."
         }
+    }
+    
+    func handleRegistrationError(_ error: RegistrationError) {
+        let errorMessage = self.errorMessage(for: error)
         showAlert(withTitle: "Something went wrong..", message: errorMessage, clearTextFields: error == .emailAlreadyInUse)
     }
 

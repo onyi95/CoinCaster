@@ -74,21 +74,14 @@ class PriceAlertViewController: UIViewController, UITextFieldDelegate {
 
 //Request notification permissions
     func checkForPermission() {
-        let notificationCenter = UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+        let notificationCenter: Void = UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if granted {
-                self.dispatchNotification()
+                print("Access granted")
             }else if let error = error {
                 print("Error requesting authorization: \(error)")
             }
         }
     }
-    
-//Create the notification content
-    func dispatchNotification(){
-        let content = UNMutableNotificationContent()
-        content.title = "Price Alert"
-        content.body = "Bitcoin has reached your target price of 'targetPrice'"
-        content.sound = UNNotificationSound.default
-    }
+
     
 }

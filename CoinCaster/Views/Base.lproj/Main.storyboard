@@ -43,6 +43,7 @@
                                     <color key="baseBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="createAccountPressed:" destination="DI6-qt-2qJ" eventType="touchUpInside" id="VyY-sT-cue"/>
                                     <segue destination="o0L-Kj-cTp" kind="show" id="3DW-V1-0km"/>
                                 </connections>
                             </button>
@@ -56,6 +57,7 @@
                                     <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="loginPressed:" destination="DI6-qt-2qJ" eventType="touchUpInside" id="Z3i-PN-tTK"/>
                                     <segue destination="OX4-Rf-koW" kind="show" id="OnR-jj-ptc"/>
                                 </connections>
                             </button>
@@ -91,7 +93,7 @@
         <!--Registration View Controller-->
         <scene sceneID="nc2-LD-RLV">
             <objects>
-                <viewController id="o0L-Kj-cTp" customClass="RegistrationViewController" customModule="CoinCaster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewController" id="o0L-Kj-cTp" customClass="RegistrationViewController" customModule="CoinCaster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Wq-3Z-8i9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -175,7 +177,7 @@
         <!--Login View Controller-->
         <scene sceneID="8Vr-CW-9zO">
             <objects>
-                <viewController id="OX4-Rf-koW" customClass="LoginViewController" customModule="CoinCaster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="OX4-Rf-koW" customClass="LoginViewController" customModule="CoinCaster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C1T-3L-PQp">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
