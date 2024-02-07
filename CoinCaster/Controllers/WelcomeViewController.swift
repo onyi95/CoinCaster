@@ -12,24 +12,22 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     @IBAction func createAccountPressed(_ sender: UIButton) {
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if let registrationViewController = segue.destination as? RegistrationViewController {
-                registrationViewController.coinManager = CoinManager() //Dependency Injection
-            }
-        }
+        performSegue(withIdentifier: "showRegistration", sender: self)
     }
     
     @IBAction func loginPressed(_ sender: UIButton) {
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if let loginViewController = segue.destination as? LoginViewController {
-                loginViewController.coinManager = CoinManager()
-            }
+        performSegue(withIdentifier: "showLogin", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showRegistration",
+           let registrationViewController = segue.destination as? RegistrationViewController {
+            registrationViewController.coinManager = CoinManager.shared
+        } else if segue.identifier == "showLogin",
+                  let loginViewController = segue.destination as? LoginViewController {
+            loginViewController.coinManager = CoinManager.shared
         }
     }
-    
-    
-    
-
 }

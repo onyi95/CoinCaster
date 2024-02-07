@@ -8,20 +8,6 @@
 import Foundation
 import KeychainSwift
 
-enum RegistrationError: Error, Equatable {
-    case networkError(String)
-    case emailAlreadyInUse
-    case other(Int)
-    case noData
-}
-
-enum LoginError: Error {
-    case networkError(String)
-    case invalidCredentials
-    case other(Int)
-    case noData
-}
-
 var currentPrice: Double?
 var userIdNo: Int!
 
@@ -33,9 +19,7 @@ struct CoinManager: CoinManagerProtocol {
     //3*. Declaring a property for the delegate created above, so that it can be used within the struct
     var delegate: PriceUpdaterDelegate?
     
-    let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
-    
-    
+    let currencyArray = ["AUD","BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
     let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC"
     let apiKey = "763B4CBF-261D-47FD-B510-242F8BFC1784"
     

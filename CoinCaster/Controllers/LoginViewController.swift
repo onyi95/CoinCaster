@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, NavigatorProtocol, AlertPresenterProtocol {
     
     // Dependency Injection for better testability
     var coinManager: CoinManagerProtocol!
@@ -21,6 +21,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextFieldSecurity()
+        self.navigator = self
+        self.alertPresenter = self
+        
     }
     
     private func configureTextFieldSecurity() {
@@ -34,7 +37,7 @@ class LoginViewController: UIViewController {
     private func attemptLogin(){
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
-            alertPresenter.showAlert(withTitle: "Missing Information", message: "Please enter both email and password.")
+            alertPresenter.showAlert(withTitle: "Missing Information", message: "Please enter both email and password.", clearTextFields: false)
             return
         }
         
@@ -57,9 +60,11 @@ class LoginViewController: UIViewController {
     
     private func handleSuccess(statusCode: Int) {
             if statusCode == 200 {
-                navigator.navigateToMainViewController()
+                DispatchQueue.main.async {
+                    self.navigator.navigateToCurrencySelectionViewController()
+                }
             } else {
-                alertPresenter.showAlert(withTitle: "Login Error", message: "Please try again.")
+                alertPresenter.showAlert(withTitle: "Login Error", message: "Please try again.", clearTextFields: false)
             }
         }
     
@@ -74,23 +79,22 @@ class LoginViewController: UIViewController {
         case .other, .noData:
             errorMessage = "Login failed. Please try again later."
         }
-        alertPresenter.showAlert(withTitle: "Login Error", message: errorMessage)
+        alertPresenter.showAlert(withTitle: "Login Error", message: errorMessage, clearTextFields: false)
     }
     
     
-    private func navigateToMainViewController() {
-        //Dismiss LoginViewController and embed ViewController in Navigation Controller
+     func navigateToCurrencySelectionViewController() {
+        //Dismiss LoginViewController and embed CurrencySelectionViewController in Navigation Controller
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let mainViewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
-                let navigationController = UINavigationController(rootViewController: mainViewController)
+            if let currencySelectionViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController") as? CurrencySelectionViewController {
+                let navigationController = UINavigationController(rootViewController: currencySelectionViewController)
                 sceneDelegate.window?.rootViewController = navigationController
             }
         }
     }
-    
-    //helper function to present alert
-    func showAlert(withTitle title: String, message: String){
+
+    func showAlert(withTitle title: String, message: String, clearTextFields: Bool = false){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)

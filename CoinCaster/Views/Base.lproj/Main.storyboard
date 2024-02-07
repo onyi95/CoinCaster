@@ -16,6 +16,13 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QmJ-P3-l1a">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="DI6-qt-2qJ" kind="relationship" relationship="rootViewController" id="rsF-3G-RDL"/>
@@ -35,7 +42,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPC-a4-k0F">
                                 <rect key="frame" x="17" y="663.33333333333337" width="359" height="48.666666666666629"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Create Account">
@@ -44,12 +51,12 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="createAccountPressed:" destination="DI6-qt-2qJ" eventType="touchUpInside" id="VyY-sT-cue"/>
-                                    <segue destination="o0L-Kj-cTp" kind="show" id="3DW-V1-0km"/>
+                                    <segue destination="o0L-Kj-cTp" kind="show" identifier="showRegistration" id="3DW-V1-0km"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76V-kJ-shK">
                                 <rect key="frame" x="16" y="726.33333333333337" width="359" height="48.666666666666629"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Log In">
@@ -58,7 +65,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="loginPressed:" destination="DI6-qt-2qJ" eventType="touchUpInside" id="Z3i-PN-tTK"/>
-                                    <segue destination="OX4-Rf-koW" kind="show" id="OnR-jj-ptc"/>
+                                    <segue destination="OX4-Rf-koW" kind="show" identifier="showLogin" id="OnR-jj-ptc"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="IG3-is-ddy">
@@ -250,10 +257,10 @@
             </objects>
             <point key="canvasLocation" x="-1025.1908396946565" y="324.64788732394368"/>
         </scene>
-        <!--View Controller-->
+        <!--Currency Selection View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="CoinCaster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrencySelectionViewController" id="BYZ-38-t0r" customClass="CurrencySelectionViewController" customModule="CoinCaster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,38 +268,36 @@
                             <pickerView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXv-Dq-DJm" userLabel="Currency Picker">
                                 <rect key="frame" x="31" y="529" width="331" height="216"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Po-rB-q0j">
-                                <rect key="frame" x="125" y="770" width="142" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Po-rB-q0j">
+                                <rect key="frame" x="125" y="766.66666666666663" width="142" height="34.333333333333371"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Set Price Alerts"/>
                                 <connections>
                                     <action selector="setPriceAlertPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5fN-6N-3l1"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CoinCaster" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdR-QE-aFM">
-                                <rect key="frame" x="81" y="87" width="230" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinCaster" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdR-QE-aFM">
+                                <rect key="frame" x="81" y="103" width="230" height="60"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="8o7-6s-qaQ">
-                                <rect key="frame" x="130" y="200" width="133" height="128"/>
+                                <rect key="frame" x="130" y="237" width="133" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7um-Ye-gdg" userLabel="Bitcoin Label">
-                                <rect key="frame" x="96" y="432" width="98" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AUD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRy-7B-7Vg" userLabel="Currency Label">
+                                <rect key="frame" x="281" y="435" width="37" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AUD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRy-7B-7Vg" userLabel="Currency Label">
-                                <rect key="frame" x="266" y="432" width="35" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7um-Ye-gdg" userLabel="Bitcoin Label">
+                                <rect key="frame" x="64" y="435" width="36.333333333333343" height="21.666666666666686"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -301,13 +306,20 @@
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="TdR-QE-aFM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="36G-54-ECW"/>
+                            <constraint firstItem="TdR-QE-aFM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JhV-iz-l96"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3Po-rB-q0j" secondAttribute="trailing" constant="126" id="TXJ-bw-yjO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TdR-QE-aFM" secondAttribute="trailing" constant="82" id="ULP-F9-gqM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cXv-Dq-DJm" secondAttribute="trailing" constant="31" id="e3k-MI-opN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cXv-Dq-DJm" secondAttribute="bottom" constant="73" id="fQX-15-O1W"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3Po-rB-q0j" secondAttribute="bottom" constant="17" id="lkK-ME-VHP"/>
                             <constraint firstItem="cXv-Dq-DJm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="31" id="tEv-va-hBv"/>
+                            <constraint firstItem="3Po-rB-q0j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="125" id="xLs-Aa-akd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="z0U-uX-zKy">
                         <barButtonItem key="rightBarButtonItem" title="Log Out" id="KbG-Az-KVd">
+                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="logOutPressed:" destination="BYZ-38-t0r" id="9Xh-Pf-GJM"/>
                             </connections>
@@ -332,52 +344,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notify me when BTC Reaches:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGN-C6-9YU" userLabel="Notification Label">
-                                <rect key="frame" x="30" y="226" width="333" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc9-fH-m0F" userLabel="Notify">
+                                <rect key="frame" x="102" y="675" width="188" height="34.333333333333371"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Turn On Notification">
+                                    <color key="baseBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="notificationButtonPressed:" destination="X3T-19-tlH" eventType="touchUpInside" id="ge8-0J-3LR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2W-pe-L6J" userLabel="Precent Sign">
+                                <rect key="frame" x="278" y="398" width="15.333333333333314" height="55"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" stepValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yfx-RY-g5j" userLabel="Percentage Stepper">
+                                <rect key="frame" x="149" y="505" width="94" height="32"/>
+                                <connections>
+                                    <action selector="stepperValueChanged:" destination="X3T-19-tlH" eventType="valueChanged" id="RsK-uA-JWK"/>
+                                </connections>
+                            </stepper>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-SI-c42">
+                                <rect key="frame" x="123" y="400" width="147" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="0r9-71-FwI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify me when BTC Reaches:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGN-C6-9YU" userLabel="Notification Label">
+                                <rect key="frame" x="26" y="196" width="340" height="32.333333333333343"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="27"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc9-fH-m0F" userLabel="Notify">
-                                <rect key="frame" x="103" y="675" width="186" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Turn On Notifications"/>
-                                <connections>
-                                    <action selector="notificationButtonPressed:" destination="X3T-19-tlH" eventType="touchUpInside" id="ge8-0J-3LR"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2W-pe-L6J" userLabel="Precent Sign">
-                                <rect key="frame" x="255" y="397" width="26" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" stepValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yfx-RY-g5j" userLabel="Percentage Stepper">
-                                <rect key="frame" x="149" y="458" width="94" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="stepperValueChanged:" destination="X3T-19-tlH" eventType="valueChanged" id="RsK-uA-JWK"/>
-                                </connections>
-                            </stepper>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gQ-SI-c42">
-                                <rect key="frame" x="148" y="397" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hmd-zL-7ip"/>
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
+                        <constraints>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="bottom" secondItem="1gQ-SI-c42" secondAttribute="bottom" constant="363" id="1IB-3U-9cU"/>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="bottom" secondItem="J2W-pe-L6J" secondAttribute="bottom" constant="365" id="9VC-Tz-2Jy"/>
+                            <constraint firstItem="J2W-pe-L6J" firstAttribute="leading" secondItem="1gQ-SI-c42" secondAttribute="trailing" constant="8" symbolic="YES" id="CL1-1W-5FJ"/>
+                            <constraint firstItem="Zc9-fH-m0F" firstAttribute="top" secondItem="hmd-zL-7ip" secondAttribute="top" constant="572" id="Q1a-lm-udE"/>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="trailing" secondItem="yfx-RY-g5j" secondAttribute="trailing" constant="150" id="R98-V4-Ip8"/>
+                            <constraint firstItem="Zc9-fH-m0F" firstAttribute="leading" secondItem="hmd-zL-7ip" secondAttribute="leading" constant="102" id="T9l-SK-fmE"/>
+                            <constraint firstItem="J2W-pe-L6J" firstAttribute="top" secondItem="hmd-zL-7ip" secondAttribute="top" constant="295" id="VyM-yg-Sjg"/>
+                            <constraint firstItem="iGN-C6-9YU" firstAttribute="top" secondItem="hmd-zL-7ip" secondAttribute="top" constant="93" id="YRL-Za-Lzi"/>
+                            <constraint firstItem="iGN-C6-9YU" firstAttribute="leading" secondItem="hmd-zL-7ip" secondAttribute="leading" constant="26" id="ZP6-za-u1n"/>
+                            <constraint firstItem="J2W-pe-L6J" firstAttribute="height" secondItem="1gQ-SI-c42" secondAttribute="height" id="ZYh-1v-uBD"/>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="trailing" secondItem="Zc9-fH-m0F" secondAttribute="trailing" constant="103" id="dP7-FG-ttQ"/>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="trailing" secondItem="1gQ-SI-c42" secondAttribute="trailing" constant="123" id="hsv-eW-Eh1"/>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="trailing" secondItem="J2W-pe-L6J" secondAttribute="trailing" constant="99.666666666666686" id="l4E-XN-0fk"/>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="trailing" secondItem="iGN-C6-9YU" secondAttribute="trailing" constant="27" id="pK4-Nd-5vw"/>
+                            <constraint firstItem="yfx-RY-g5j" firstAttribute="leading" secondItem="hmd-zL-7ip" secondAttribute="leading" constant="149" id="ua1-7M-UQk"/>
+                            <constraint firstItem="1gQ-SI-c42" firstAttribute="leading" secondItem="hmd-zL-7ip" secondAttribute="leading" constant="123" id="xhN-nz-dze"/>
+                            <constraint firstItem="hmd-zL-7ip" firstAttribute="bottom" secondItem="yfx-RY-g5j" secondAttribute="bottom" constant="281" id="y2m-bf-cEJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="M6Y-Zc-fvN"/>
                     <connections>
                         <outlet property="percentageTextField" destination="1gQ-SI-c42" id="OaY-CV-FG7"/>
+                        <outlet property="view" destination="Luw-KZ-aMm" id="qse-fh-jg2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y4t-G2-Umb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -388,7 +420,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="y4v-D8-iIi"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="bitcoin" width="738" height="736"/>
         <systemColor name="systemGrayColor">

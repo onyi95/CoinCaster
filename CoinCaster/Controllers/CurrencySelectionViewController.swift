@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CurrencySelectionViewController.swift
 //  CoinCaster
 //
 //  Created by Onyi Esu on 01/01/2024.
@@ -8,11 +8,12 @@
 import UIKit
 import KeychainSwift
 
-class ViewController: UIViewController {
-    
-    var coinManager = CoinManager.shared
+class CurrencySelectionViewController: UIViewController {
+    var coinManagerShared = CoinManager.shared
+    var coinManager: CoinManagerProtocol!
     var selectedCurrency: String?
-    
+    var currentPrice: Double?
+    var delegate: PriceUpdaterDelegate!
     
     @IBOutlet weak var bitcoinLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
@@ -21,16 +22,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //set the ViewController.swift as the datasource and delegate for the picker
+        //set the CurrencySelectionViewController.swift as the datasource and delegate for the picker
         currencyPicker.dataSource = self
         currencyPicker.delegate = self
-        coinManager.delegate = self  //the ViewController conforms to the PriceUpdaterDelegate and implements the required methods by                             setting itself as the delegate 3*
+        coinManagerShared.delegate = self  //the CurrencySelectionViewController conforms to the PriceUpdaterDelegate and implements the required methods by                             setting itself as the delegate 3*
+        self.navigationController?.navigationBar.tintColor = UIColor.darkGray
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPriceAlert" {
             if let priceAlertViewController = segue.destination as? PriceAlertViewController {
                 priceAlertViewController.recievedUserCurrency = selectedCurrency         //Property assignment to pass the selected currency to priceAlertViewController to then be sent to the backend for use in API call, when the user taps "Turn On Notifications"
+                priceAlertViewController.coinManager = CoinManager()
+                priceAlertViewController.currentPrice = currentPrice //Pass the current price for target price calculation
             }
         }
     }
@@ -41,30 +45,30 @@ class ViewController: UIViewController {
 }
     //MARK: - UIPickerView DataSource Methods
   
-extension ViewController: UIPickerViewDataSource {
+extension CurrencySelectionViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1 //we only need one column of data in this context
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return coinManager.currencyArray.count  //tell Xcode how many rows this picker should have
+        return coinManagerShared.currencyArray.count  //tell Xcode how many rows this picker should have
     }
 }
 
     //MARK: - UIPickerView Delegate Methods
     // to be able to update the PickerView with some titles and detect when it is interacted with, setting up the PickerView’s delegate methods
     
-extension ViewController: UIPickerViewDelegate {
+extension CurrencySelectionViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return coinManager.currencyArray[row]
+        return coinManagerShared.currencyArray[row]
         //When the PickerView is loading up, it will ask its delegate for a row title and call the above method once for every row.
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedCurrency = coinManager.currencyArray[row]
+        let selectedCurrency = coinManagerShared.currencyArray[row]
         
         //passing the selected currency to CoinManager
-        coinManager.updateCoinPrice(selectedCurrency)
+        coinManagerShared.updateCoinPrice(selectedCurrency)
         
         self.selectedCurrency = selectedCurrency
     }
@@ -74,11 +78,12 @@ extension ViewController: UIPickerViewDelegate {
 //MARK: - CoinManager Delegate Methods
 
 //2*. Creating the delegate class
-extension ViewController: PriceUpdaterDelegate {
+extension CurrencySelectionViewController: PriceUpdaterDelegate {
     func didUpdatePrice(price: String, currency: String) {
         DispatchQueue.main.async { //update the main thread
             self.bitcoinLabel.text = price
             self.currencyLabel.text = currency
+            self.currentPrice = Double(price) // Update the current price when the price is fetched
         }
     }
     
@@ -87,7 +92,7 @@ extension ViewController: PriceUpdaterDelegate {
     }
 }
 //MARK: - Handle User Logout
-extension ViewController {
+extension CurrencySelectionViewController {
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         guard let user_id = KeychainSwift().get("userId") else {
             print("User ID not found")

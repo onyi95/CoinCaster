@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //To maintain a user's logged-in state even after closing the app
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if UserSessionManager.shared.isUserLoggedIn() {
-                    let mainViewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
+                    let mainViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController")
                     let navigationController = UINavigationController(rootViewController: mainViewController)
                         // Set the navigation controller as the root view controller
                     window?.rootViewController = navigationController

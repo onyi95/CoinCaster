@@ -19,9 +19,11 @@
 		AA636F2E2B715FB200828A62 /* RegistrationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F2D2B715FB200828A62 /* RegistrationViewControllerTests.swift */; };
 		AA636F302B72620200828A62 /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F2F2B72620200828A62 /* LoginViewControllerTests.swift */; };
 		AA636F322B726A9C00828A62 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F312B726A9C00828A62 /* Protocols.swift */; };
+		AA636F342B72C2C900828A62 /* CurrencySelectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F332B72C2C800828A62 /* CurrencySelectionViewControllerTests.swift */; };
+		AA636F362B72FFC800828A62 /* PriceAlertViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F352B72FFC800828A62 /* PriceAlertViewControllerTests.swift */; };
 		AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F6482B433F4500D3727B /* AppDelegate.swift */; };
 		AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */; };
-		AAC2F64D2B433F4500D3727B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64C2B433F4500D3727B /* ViewController.swift */; };
+		AAC2F64D2B433F4500D3727B /* CurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64C2B433F4500D3727B /* CurrencySelectionViewController.swift */; };
 		AAC2F6502B433F4500D3727B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAC2F64E2B433F4500D3727B /* Main.storyboard */; };
 		AAC2F6522B433F4600D3727B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC2F6512B433F4600D3727B /* Assets.xcassets */; };
 		AAC2F6552B433F4600D3727B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAC2F6532B433F4600D3727B /* LaunchScreen.storyboard */; };
@@ -54,10 +56,12 @@
 		AA636F2D2B715FB200828A62 /* RegistrationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewControllerTests.swift; sourceTree = "<group>"; };
 		AA636F2F2B72620200828A62 /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
 		AA636F312B726A9C00828A62 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		AA636F332B72C2C800828A62 /* CurrencySelectionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewControllerTests.swift; sourceTree = "<group>"; };
+		AA636F352B72FFC800828A62 /* PriceAlertViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceAlertViewControllerTests.swift; sourceTree = "<group>"; };
 		AAC2F6452B433F4500D3727B /* CoinCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC2F6482B433F4500D3727B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AAC2F64C2B433F4500D3727B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AAC2F64C2B433F4500D3727B /* CurrencySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewController.swift; sourceTree = "<group>"; };
 		AAC2F64F2B433F4500D3727B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AAC2F6512B433F4600D3727B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAC2F6542B433F4600D3727B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,7 +95,7 @@
 				AA559C5B2B5D3F7A00D5C432 /* WelcomeViewController.swift */,
 				AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */,
 				AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */,
-				AAC2F64C2B433F4500D3727B /* ViewController.swift */,
+				AAC2F64C2B433F4500D3727B /* CurrencySelectionViewController.swift */,
 				AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */,
 			);
 			path = Controllers;
@@ -121,6 +125,8 @@
 				AA636F2B2B71579400828A62 /* MockCoinManager.swift */,
 				AA636F2D2B715FB200828A62 /* RegistrationViewControllerTests.swift */,
 				AA636F2F2B72620200828A62 /* LoginViewControllerTests.swift */,
+				AA636F332B72C2C800828A62 /* CurrencySelectionViewControllerTests.swift */,
+				AA636F352B72FFC800828A62 /* PriceAlertViewControllerTests.swift */,
 			);
 			path = CoinCasterTests;
 			sourceTree = "<group>";
@@ -325,6 +331,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA636F342B72C2C900828A62 /* CurrencySelectionViewControllerTests.swift in Sources */,
+				AA636F362B72FFC800828A62 /* PriceAlertViewControllerTests.swift in Sources */,
 				AA636F302B72620200828A62 /* LoginViewControllerTests.swift in Sources */,
 				AA636F2C2B71579400828A62 /* MockCoinManager.swift in Sources */,
 				AA636F2E2B715FB200828A62 /* RegistrationViewControllerTests.swift in Sources */,
@@ -337,7 +345,7 @@
 			files = (
 				AA559C602B5D43B200D5C432 /* LoginViewController.swift in Sources */,
 				AA27D60C2B4448F600453A29 /* CoinManager.swift in Sources */,
-				AAC2F64D2B433F4500D3727B /* ViewController.swift in Sources */,
+				AAC2F64D2B433F4500D3727B /* CurrencySelectionViewController.swift in Sources */,
 				AA636F322B726A9C00828A62 /* Protocols.swift in Sources */,
 				AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */,
 				AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */,

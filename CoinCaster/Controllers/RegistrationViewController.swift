@@ -7,11 +7,12 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController {
+class RegistrationViewController: UIViewController, NavigatorProtocol, AlertPresenterProtocol {
     
     var coinManager: CoinManagerProtocol! // Dependency Injection
     var alertPresenter: AlertPresenterProtocol!
     var navigator: NavigatorProtocol!
+    
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -20,6 +21,8 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextFieldSecurity()
+        self.navigator = self
+        self.alertPresenter = self
     }
     
     private func configureTextFieldSecurity() {             //Enhance security for user's data
@@ -33,7 +36,7 @@ class RegistrationViewController: UIViewController {
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let retypePassword = retypePasswordTextField.text, !retypePassword.isEmpty else {
-            alertPresenter.showAlert(withTitle: "We need your details please", message: "Fields cannot be empty")
+            alertPresenter.showAlert(withTitle: "We need your details please", message: "Fields cannot be empty", clearTextFields: false)
             sender.isEnabled = true // Re-enable the button before return
             return
         }
@@ -47,26 +50,27 @@ class RegistrationViewController: UIViewController {
                 }
             }
         } else {
-            alertPresenter.showAlert(withTitle: "It's ok, we all make mistakes..", message: "Passwords do not match")
+            alertPresenter.showAlert(withTitle: "It's ok, we all make mistakes..", message: "Passwords do not match", clearTextFields: false)
+                sender.isEnabled = true // Re-enable the button
         }
     }
     
     private func handleRegistrationResult(_ result: Result<Int, RegistrationError>) {
         switch result {
         case .success:
-            navigator.navigateToMainViewController()
+            navigator.navigateToCurrencySelectionViewController()
         case .failure(let error):
             let errorMessage = errorMessage(for: error)
             handleRegistrationError(error)
         }
     }
 
-    private func navigateToMainViewController() {
-        //Dismiss RegistrationViewController and embed ViewController in Navigation Controller
+    func navigateToCurrencySelectionViewController() {
+        //Dismiss RegistrationViewController and embed CurrencySelectionViewController in Navigation Controller
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let mainViewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
-                let navigationController = UINavigationController(rootViewController: mainViewController)
+            if let currencySelectionViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController") as? CurrencySelectionViewController {
+                let navigationController = UINavigationController(rootViewController: currencySelectionViewController)
                 sceneDelegate.window?.rootViewController = navigationController
             }
         }
@@ -90,7 +94,6 @@ class RegistrationViewController: UIViewController {
         showAlert(withTitle: "Something went wrong..", message: errorMessage, clearTextFields: error == .emailAlreadyInUse)
     }
 
-    // Helper function to present alerts
     func showAlert(withTitle title: String, message: String, clearTextFields: Bool = false) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in

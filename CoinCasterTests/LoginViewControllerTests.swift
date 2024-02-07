@@ -74,7 +74,7 @@ final class LoginViewControllerTests: XCTestCase {
         XCTAssertEqual(mockCoinManager.passedPassword, expectedPassword)
     }
 
-    func testLoginPressed_WithLoginSuccess_NavigatesToMainViewController() {
+    func testLoginPressed_WithLoginSuccess_NavigatesToCurrencySelectionViewController() {
         // Given
         sut.emailTextField.text = "test@example.com"
         sut.passwordTextField.text = "password123"
@@ -87,7 +87,7 @@ final class LoginViewControllerTests: XCTestCase {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         
         // Then
-        XCTAssertTrue(mockNavigator.navigationToMainViewControllerCalled)
+        XCTAssertTrue(mockNavigator.navigateToCurrencySelectionViewControllerCalled)
     }
 
     func testLoginPressed_WithNetworkError_ShowsErrorMessage() {

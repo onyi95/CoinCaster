@@ -14,3 +14,16 @@ struct segues {
 }
 
 
+enum RegistrationError: Error, Equatable {
+    case networkError(String)
+    case emailAlreadyInUse
+    case other(Int)
+    case noData
+}
+
+enum LoginError: Error {
+    case networkError(String)
+    case invalidCredentials
+    case other(Int)
+    case noData
+}
