@@ -9,11 +9,12 @@ import UIKit
 import KeychainSwift
 
 class CurrencySelectionViewController: UIViewController {
-    var coinManagerShared = CoinManager.shared
+    
     var coinManager: CoinManagerProtocol!
     var selectedCurrency: String?
     var currentPrice: Double?
     var delegate: PriceUpdaterDelegate!
+    var coinManagerShared = CoinManager.shared
     
     @IBOutlet weak var bitcoinLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!

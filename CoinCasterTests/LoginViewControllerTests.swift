@@ -53,8 +53,9 @@ final class LoginViewControllerTests: XCTestCase {
         sut.loginPressed(UIButton())
         
         // Then
-        XCTAssertTrue(mockAlertPresenter.lastTitle == "Missing Information")
-        XCTAssertTrue(mockAlertPresenter.lastMessage == "Please enter both email and password.")
+        XCTAssertTrue(mockAlertPresenter.showAlertCalled, "Alert was not called when login was pressed with empty fields.")
+        XCTAssertEqual(mockAlertPresenter.lastTitle, "Missing Information", "The alert title is not correct.")
+        XCTAssertEqual(mockAlertPresenter.lastMessage, "Please enter both email and password.", "The alert message is not correct.")
     }
 
     func testLoginPressed_WithValidCredentials_CallsLoginWithCorrectCredentials() {

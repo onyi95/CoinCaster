@@ -24,20 +24,10 @@ struct CoinManager: CoinManagerProtocol {
     let apiKey = "763B4CBF-261D-47FD-B510-242F8BFC1784"
     
     func updateCoinPrice(_ currency: String) {
-        
         let fullString = "\(baseURL)/\(currency)/?apikey=\(apiKey)"
-        
-        //1. Create a URL
-        
         if let url = URL(string: fullString) {
-            
-            //2. Create a URL session
-            
             let session = URLSession(configuration: .default)
-            
-            //3. Give the session a task
             let task = session.dataTask(with: url) { data, response, error in
-                
                 if error != nil {
                     delegate?.didFailWithError(error: error!) // using the delegate methods to handle the errors
                     // print(error!)
@@ -56,10 +46,7 @@ struct CoinManager: CoinManagerProtocol {
                     }
                 }
             }
-            
-            //4. Start the task
             task.resume()
-            
         }
         
     }

@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 
-class PriceAlertViewController: UIViewController, UITextFieldDelegate, AlertPresenterProtocol {
+class PriceAlertViewController: UIViewController, UITextFieldDelegate {
     
     var coinManager: CoinManagerProtocol!
     var notifications: NotificationCenterProtocol!
@@ -21,7 +21,7 @@ class PriceAlertViewController: UIViewController, UITextFieldDelegate, AlertPres
     override func viewDidLoad() {
         super.viewDidLoad()
         percentageTextField.delegate = self
-        self.alertPresenter = self
+        alertPresenter = AlertPresenter(viewController: self)
         setupTapGesture()
         self.navigationController?.navigationBar.tintColor = UIColor.darkGray
     }
@@ -50,7 +50,7 @@ class PriceAlertViewController: UIViewController, UITextFieldDelegate, AlertPres
         guard let percentageString = percentageTextField.text,
               let percentage = Double(percentageString),
               let currentPrice = currentPrice else {
-            alertPresenter.showAlert(withTitle: "Invalid", message: "Please select currency and enter a valid percentage.", clearTextFields: false)
+            alertPresenter.showAlert(withTitle: "Invalid", message: "Please select currency and enter a valid percentage.", onDismiss: nil)
             return
         }
 
@@ -74,18 +74,12 @@ class PriceAlertViewController: UIViewController, UITextFieldDelegate, AlertPres
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted {
                     print("Access granted")
+                    DispatchQueue.main.async {
+                        self.alertPresenter.showAlert(withTitle: "All Set!", message: "You will be notified once your target Bitcoin price has been reached", onDismiss: nil) }
                 } else if let error = error {
                     print("Error requesting authorization: \(error)")
                 }
             }
         }
-
-   func showAlert(withTitle title: String, message: String, clearTextFields: Bool = false) {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alert, animated: true)
-        }
-    }
     
 }

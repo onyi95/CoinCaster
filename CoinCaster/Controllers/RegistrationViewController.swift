@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController, NavigatorProtocol, AlertPresenterProtocol {
+class RegistrationViewController: UIViewController {
     
     var coinManager: CoinManagerProtocol! // Dependency Injection
     var alertPresenter: AlertPresenterProtocol!
@@ -21,8 +21,8 @@ class RegistrationViewController: UIViewController, NavigatorProtocol, AlertPres
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextFieldSecurity()
-        self.navigator = self
-        self.alertPresenter = self
+        alertPresenter = AlertPresenter(viewController: self)
+        navigator = Navigator(viewController: self)
     }
     
     private func configureTextFieldSecurity() {             //Enhance security for user's data
@@ -36,7 +36,7 @@ class RegistrationViewController: UIViewController, NavigatorProtocol, AlertPres
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let retypePassword = retypePasswordTextField.text, !retypePassword.isEmpty else {
-            alertPresenter.showAlert(withTitle: "We need your details please", message: "Fields cannot be empty", clearTextFields: false)
+            alertPresenter.showAlert(withTitle: "We need your details please", message: "Fields cannot be empty", onDismiss: nil)
             sender.isEnabled = true // Re-enable the button before return
             return
         }
@@ -50,7 +50,7 @@ class RegistrationViewController: UIViewController, NavigatorProtocol, AlertPres
                 }
             }
         } else {
-            alertPresenter.showAlert(withTitle: "It's ok, we all make mistakes..", message: "Passwords do not match", clearTextFields: false)
+            alertPresenter.showAlert(withTitle: "It's ok, we all make mistakes..", message: "Passwords do not match", onDismiss: nil)
                 sender.isEnabled = true // Re-enable the button
         }
     }
@@ -60,22 +60,10 @@ class RegistrationViewController: UIViewController, NavigatorProtocol, AlertPres
         case .success:
             navigator.navigateToCurrencySelectionViewController()
         case .failure(let error):
-            let errorMessage = errorMessage(for: error)
+            _ = errorMessage(for: error)
             handleRegistrationError(error)
         }
     }
-
-    func navigateToCurrencySelectionViewController() {
-        //Dismiss RegistrationViewController and embed CurrencySelectionViewController in Navigation Controller
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let currencySelectionViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController") as? CurrencySelectionViewController {
-                let navigationController = UINavigationController(rootViewController: currencySelectionViewController)
-                sceneDelegate.window?.rootViewController = navigationController
-            }
-        }
-    }
-    
     func errorMessage(for error: RegistrationError) -> String { //separate message determination for testability
         switch error {
         case .networkError(let description):
@@ -91,18 +79,11 @@ class RegistrationViewController: UIViewController, NavigatorProtocol, AlertPres
     
     func handleRegistrationError(_ error: RegistrationError) {
         let errorMessage = self.errorMessage(for: error)
-        showAlert(withTitle: "Something went wrong..", message: errorMessage, clearTextFields: error == .emailAlreadyInUse)
-    }
-
-    func showAlert(withTitle title: String, message: String, clearTextFields: Bool = false) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            if clearTextFields {
+        alertPresenter.showAlert(withTitle: "Something went wrong..", message: errorMessage, onDismiss:{
+            if error == .emailAlreadyInUse {
                 self.passwordTextField.text = ""
                 self.retypePasswordTextField.text = ""
             }
-        })
-        self.present(alert, animated: true)
+        } )
     }
-
 }

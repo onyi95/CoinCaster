@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, NavigatorProtocol, AlertPresenterProtocol {
+class LoginViewController: UIViewController {
     
     // Dependency Injection for better testability
     var coinManager: CoinManagerProtocol!
@@ -21,9 +21,9 @@ class LoginViewController: UIViewController, NavigatorProtocol, AlertPresenterPr
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextFieldSecurity()
-        self.navigator = self
-        self.alertPresenter = self
-        
+        alertPresenter = AlertPresenter(viewController: self)
+        navigator = Navigator(viewController: self)
+
     }
     
     private func configureTextFieldSecurity() {
@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, NavigatorProtocol, AlertPresenterPr
     private func attemptLogin(){
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
-            alertPresenter.showAlert(withTitle: "Missing Information", message: "Please enter both email and password.", clearTextFields: false)
+            alertPresenter.showAlert(withTitle: "Missing Information", message: "Please enter both email and password.", onDismiss: nil)
             return
         }
         
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController, NavigatorProtocol, AlertPresenterPr
                     self.navigator.navigateToCurrencySelectionViewController()
                 }
             } else {
-                alertPresenter.showAlert(withTitle: "Login Error", message: "Please try again.", clearTextFields: false)
+                alertPresenter.showAlert(withTitle: "Login Error", message: "Please try again.", onDismiss: nil)
             }
         }
     
@@ -79,24 +79,6 @@ class LoginViewController: UIViewController, NavigatorProtocol, AlertPresenterPr
         case .other, .noData:
             errorMessage = "Login failed. Please try again later."
         }
-        alertPresenter.showAlert(withTitle: "Login Error", message: errorMessage, clearTextFields: false)
-    }
-    
-    
-     func navigateToCurrencySelectionViewController() {
-        //Dismiss LoginViewController and embed CurrencySelectionViewController in Navigation Controller
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let currencySelectionViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController") as? CurrencySelectionViewController {
-                let navigationController = UINavigationController(rootViewController: currencySelectionViewController)
-                sceneDelegate.window?.rootViewController = navigationController
-            }
-        }
-    }
-
-    func showAlert(withTitle title: String, message: String, clearTextFields: Bool = false){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
+        alertPresenter.showAlert(withTitle: "Login Error", message: errorMessage, onDismiss: nil)
     }
 }

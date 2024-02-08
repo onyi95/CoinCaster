@@ -21,6 +21,9 @@
 		AA636F322B726A9C00828A62 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F312B726A9C00828A62 /* Protocols.swift */; };
 		AA636F342B72C2C900828A62 /* CurrencySelectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F332B72C2C800828A62 /* CurrencySelectionViewControllerTests.swift */; };
 		AA636F362B72FFC800828A62 /* PriceAlertViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F352B72FFC800828A62 /* PriceAlertViewControllerTests.swift */; };
+		AA636F3C2B74712700828A62 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA636F3B2B74712600828A62 /* AlertPresenter.swift */; };
+		AA996D9C2B756F60002876EC /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA996D9B2B756F60002876EC /* Navigator.swift */; };
+		AA996DA02B7581D0002876EC /* GetCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA996D9F2B7581D0002876EC /* GetCurrency.swift */; };
 		AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F6482B433F4500D3727B /* AppDelegate.swift */; };
 		AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */; };
 		AAC2F64D2B433F4500D3727B /* CurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64C2B433F4500D3727B /* CurrencySelectionViewController.swift */; };
@@ -58,6 +61,9 @@
 		AA636F312B726A9C00828A62 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		AA636F332B72C2C800828A62 /* CurrencySelectionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewControllerTests.swift; sourceTree = "<group>"; };
 		AA636F352B72FFC800828A62 /* PriceAlertViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceAlertViewControllerTests.swift; sourceTree = "<group>"; };
+		AA636F3B2B74712600828A62 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		AA996D9B2B756F60002876EC /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		AA996D9F2B7581D0002876EC /* GetCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrency.swift; sourceTree = "<group>"; };
 		AAC2F6452B433F4500D3727B /* CoinCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC2F6482B433F4500D3727B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +179,9 @@
 				AAC2F6562B433F4600D3727B /* Info.plist */,
 				AA559C612B63E29100D5C432 /* Constants.swift */,
 				AA636F312B726A9C00828A62 /* Protocols.swift */,
+				AA636F3B2B74712600828A62 /* AlertPresenter.swift */,
+				AA996D9B2B756F60002876EC /* Navigator.swift */,
+				AA996D9F2B7581D0002876EC /* GetCurrency.swift */,
 			);
 			path = CoinCaster;
 			sourceTree = "<group>";
@@ -348,8 +357,11 @@
 				AAC2F64D2B433F4500D3727B /* CurrencySelectionViewController.swift in Sources */,
 				AA636F322B726A9C00828A62 /* Protocols.swift in Sources */,
 				AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */,
+				AA996DA02B7581D0002876EC /* GetCurrency.swift in Sources */,
 				AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */,
 				AA559C622B63E29100D5C432 /* Constants.swift in Sources */,
+				AA996D9C2B756F60002876EC /* Navigator.swift in Sources */,
+				AA636F3C2B74712700828A62 /* AlertPresenter.swift in Sources */,
 				AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */,
 				AA559C642B6A51C400D5C432 /* UserSessionManager.swift in Sources */,
 				AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */,

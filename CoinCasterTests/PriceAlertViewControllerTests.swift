@@ -68,17 +68,11 @@ final class PriceAlertViewControllerTests: XCTestCase {
     
     func testNotificationButtonPressed_InvalidPercentage_ShowsInvalidInputAlert() {
         // Arrange
-        let expectation = XCTestExpectation(description: "Alert presented")
-        mockAlertPresenter.completion = {
-            expectation.fulfill()
-        }
         sut.percentageTextField.text = "Invalid" // Set invalid input to trigger alert
 
         // Act
         sut.notificationButtonPressed(UIButton())
 
-        // Wait for the expectation
-        wait(for: [expectation], timeout: 1.0)
 
         // Assert
         XCTAssertTrue(mockAlertPresenter.showAlertCalled)
@@ -117,7 +111,7 @@ final class PriceAlertViewControllerTests: XCTestCase {
         let expectedMessage = "Test Message"
         
         // Act
-        mockAlertPresenter.showAlert(withTitle: expectedTitle, message: expectedMessage, clearTextFields: false)
+        mockAlertPresenter.showAlert(withTitle: expectedTitle, message: expectedMessage, onDismiss: nil)
         
         // Assert
         XCTAssertTrue(mockAlertPresenter.showAlertCalled, "showAlert was not called on the mock")

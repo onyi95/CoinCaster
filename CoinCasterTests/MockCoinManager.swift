@@ -10,7 +10,10 @@ import Foundation
 import UserNotifications
 
 class MockCoinManager: CoinManagerProtocol {
-
+    
+    func logoutUser(withUserId userId: String, completion: @escaping (Bool) -> Void) {
+        
+    }
     
     var registerUserCalled = false
     var loginUserCalled = false
@@ -60,54 +63,59 @@ class MockAlertPresenter: AlertPresenterProtocol {
     var lastTitle: String?
     var lastMessage: String?
     var showAlertCalled = false
-    var isClearTextFields: Bool?
-    var completion: (() -> Void)? // Added to handle asynchronous notification
+    var onDismissClosure: (() -> Void)?
+    var onDismissCalled = false
     
-    func showAlert(withTitle title: String, message: String, clearTextFields: Bool = false) {
-        DispatchQueue.main.async {
-            // Ensure async execution to mimic real-world conditions
+    func showAlert(withTitle title: String, message: String, onDismiss: (() -> Void)? = nil) {
             self.showAlertCalled = true
             self.lastTitle = title
             self.lastMessage = message
-            self.completion?()
+            if let onDismiss = onDismiss {
+                    onDismiss() // Call the closure if it's not nil
+                    onDismissCalled = true
+                }
+    }
+}
+    
+    class MockNavigator: NavigatorProtocol {
+        var navigateToCurrencySelectionViewControllerCalled = false
+        
+        func navigateToCurrencySelectionViewController() {
+            navigateToCurrencySelectionViewControllerCalled = true
         }
     }
-}
-
-class MockNavigator: NavigatorProtocol {
-    var navigateToCurrencySelectionViewControllerCalled = false
     
-    func navigateToCurrencySelectionViewController() {
-        navigateToCurrencySelectionViewControllerCalled = true
+    class MockPriceUpdaterDelegate: PriceUpdaterDelegate {
+        var didUpdatePriceCalled = false
+        var lastPrice: String?
+        var lastCurrency: String?
+        var errorReceived: Error?
+        
+        func didUpdatePrice(price: String, currency: String) {
+            didUpdatePriceCalled = true
+            //         DispatchQueue.main.async { //update the main thread
+            //             self.lastPrice = price
+            //             self.lastCurrency = currency
+            //         }
+            
+        }
+        
+        func didFailWithError(error: Error) {
+            errorReceived = error
+        }
     }
-}
-
-class MockPriceUpdaterDelegate: PriceUpdaterDelegate {
-    var didUpdatePriceCalled = false
-     var lastPrice: String?
-     var lastCurrency: String?
-     var errorReceived: Error?
-
-     func didUpdatePrice(price: String, currency: String) {
-         didUpdatePriceCalled = true
-//         DispatchQueue.main.async { //update the main thread
-//             self.lastPrice = price
-//             self.lastCurrency = currency
-//         }
-
-     }
-
-     func didFailWithError(error: Error) {
-         errorReceived = error
-     }
-}
-
-class MockNotificationCenter: NotificationCenterProtocol {
-    var authorizationRequested = false
     
-    func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
-        authorizationRequested = true
-        completionHandler(true, nil)  // Simulate authorization granted
+    class MockNotificationCenter: NotificationCenterProtocol {
+        var authorizationRequested = false
+        
+        func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
+            authorizationRequested = true
+            completionHandler(true, nil)  // Simulate authorization granted
+        }
     }
-}
+
+//class MockSessionManager: {
+//    
+//}
+    
 
