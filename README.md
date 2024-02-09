@@ -1,6 +1,7 @@
 Cryptocurrency Price Alert App
 
 Overview 
+
 This project is a comprehensive iOS application designed to notify users when Bitcoin reaches a specified target price. Built with Swift and leveraging the iOS SDK, the app integrates a Flask backend to manage user registrations, login sessions, and target price alerts. The application showcases robust Object-Oriented Programming (OOP) practices, API design, multithreading for asynchronous tasks, and effective mobile memory management.
 
 Features
