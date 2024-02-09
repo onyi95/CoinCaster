@@ -38,3 +38,6 @@ Running the Project
     * Configure the project with your Apple Developer account to enable APNs.
     * Update the backend API URL in the iOS project to point to your Flask app.
     * Run the app on an iOS device or simulator.
+* API Key Information:
+This project uses a free, limited-use API key for [coinapi.io], which is subject to request limitations (100 requests per day). While this key is sufficient for demonstration purposes and initial exploration of the project, frequent use or testing might exceed these limits.
+If you encounter rate-limiting issues or prefer to use your own API key: Visit coinapi.io to obtain a personal API key and replace the API key in the project.
