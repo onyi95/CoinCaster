@@ -13,8 +13,6 @@ class CurrencySelectionViewController: UIViewController {
     var coinManager: CoinManagerProtocol!
     var selectedCurrency: String?
     var currentPrice: Double?
-    var delegate: PriceUpdaterDelegate!
-    var coinManagerShared = CoinManager.shared
     
     @IBOutlet weak var bitcoinLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
@@ -23,11 +21,18 @@ class CurrencySelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //set the CurrencySelectionViewController.swift as the datasource and delegate for the picker
+        //set the VC as the datasource and delegate for the picker
         currencyPicker.dataSource = self
         currencyPicker.delegate = self
-        coinManagerShared.delegate = self  //the CurrencySelectionViewController conforms to the PriceUpdaterDelegate and implements the required methods by                             setting itself as the delegate 3*
+        
         self.navigationController?.navigationBar.tintColor = UIColor.darkGray
+        
+        setupCoinManager()
+    }
+    
+    private func setupCoinManager() {
+        coinManager = CoinManager()
+        coinManager?.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,7 +57,7 @@ extension CurrencySelectionViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return coinManagerShared.currencyArray.count  //tell Xcode how many rows this picker should have
+        return coinManager.currencyArray.count  //tell Xcode how many rows this picker should have
     }
 }
 
@@ -61,15 +66,15 @@ extension CurrencySelectionViewController: UIPickerViewDataSource {
     
 extension CurrencySelectionViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return coinManagerShared.currencyArray[row]
+        return coinManager.currencyArray[row]
         //When the PickerView is loading up, it will ask its delegate for a row title and call the above method once for every row.
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedCurrency = coinManagerShared.currencyArray[row]
+        let selectedCurrency = coinManager.currencyArray[row]
         
         //passing the selected currency to CoinManager
-        coinManagerShared.updateCoinPrice(selectedCurrency)
+        coinManager.updateCoinPrice(selectedCurrency)
         
         self.selectedCurrency = selectedCurrency
     }
@@ -78,7 +83,7 @@ extension CurrencySelectionViewController: UIPickerViewDelegate {
 
 //MARK: - CoinManager Delegate Methods
 
-//2*. Creating the delegate class
+// Creating the delegate class
 extension CurrencySelectionViewController: PriceUpdaterDelegate {
     func didUpdatePrice(price: String, currency: String) {
         DispatchQueue.main.async { //update the main thread
@@ -99,7 +104,7 @@ extension CurrencySelectionViewController {
             print("User ID not found")
             return
         }
-        CoinManager.shared.logoutUser(withUserId: user_id) { [weak self] success in
+        coinManager.logoutUser(withUserId: user_id) { [weak self] success in
             DispatchQueue.main.async {
                 if success {
                     self?.clearUserDataAndNavigateToWelcomeScreen()

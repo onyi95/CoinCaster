@@ -8,6 +8,7 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
+    var coinManager: CoinManagerProtocol = CoinManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,10 @@ class WelcomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRegistration",
            let registrationViewController = segue.destination as? RegistrationViewController {
-            registrationViewController.coinManager = CoinManager.shared
+            registrationViewController.coinManager = coinManager
         } else if segue.identifier == "showLogin",
                   let loginViewController = segue.destination as? LoginViewController {
-            loginViewController.coinManager = CoinManager.shared
+            loginViewController.coinManager = coinManager
         }
     }
 }

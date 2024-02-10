@@ -10,6 +10,8 @@ import Foundation
 import UserNotifications
 
 class MockCoinManager: CoinManagerProtocol {
+    var currencyArray: [String] = ["jhhh"]
+    
     
     func logoutUser(withUserId userId: String, completion: @escaping (Bool) -> Void) {
         

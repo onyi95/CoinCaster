@@ -9,7 +9,7 @@ import UIKit
 
 class RegistrationViewController: UIViewController {
     
-    var coinManager: CoinManagerProtocol! // Dependency Injection
+    var coinManager: CoinManagerProtocol!
     var alertPresenter: AlertPresenterProtocol!
     var navigator: NavigatorProtocol!
     

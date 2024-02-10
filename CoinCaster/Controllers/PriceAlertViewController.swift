@@ -56,6 +56,7 @@ class PriceAlertViewController: UIViewController, UITextFieldDelegate {
 
         let targetPrice = calculateTargetPrice(percentage: percentage, basedOn: currentPrice)
         coinManager.sendTargetPriceToServer(targetPrice: targetPrice)
+        print(targetPrice)
         
         if let currency = recievedUserCurrency {
             //print(currency)

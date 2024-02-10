@@ -23,7 +23,6 @@ class LoginViewController: UIViewController {
         configureTextFieldSecurity()
         alertPresenter = AlertPresenter(viewController: self)
         navigator = Navigator(viewController: self)
-
     }
     
     private func configureTextFieldSecurity() {

@@ -16,13 +16,15 @@ protocol NavigatorProtocol {
     func navigateToCurrencySelectionViewController()
 }
 
-protocol CoinManagerProtocol {
+protocol CoinManagerProtocol: AnyObject  {
+    func updateCoinPrice(_ currency: String)
     func registerUser(email: String, password: String, completion : @escaping (Result<Int, RegistrationError>) -> Void)
     func loginUser(email: String, password: String, completion: @escaping (Result<Int, LoginError>) -> Void)
     func logoutUser(withUserId userId: String, completion: @escaping (Bool) -> Void)
     func sendTargetPriceToServer(targetPrice: Double)
     func userSelectedCurrency(currency: String)
-    func updateCoinPrice(_ currency: String)
+    var currencyArray: [String] {get}
+    var delegate: PriceUpdaterDelegate? { get set }
 }
 
 protocol PriceUpdaterDelegate: AnyObject {

@@ -9,6 +9,7 @@ import UIKit
 
 class Navigator: NavigatorProtocol {
     weak var viewController: UIViewController?
+    var coinManager: CoinManagerProtocol = CoinManager()
     
     init(viewController: UIViewController) {
         self.viewController = viewController
@@ -21,7 +22,7 @@ class Navigator: NavigatorProtocol {
             if let currencySelectionViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController") as? CurrencySelectionViewController {
                 let navigationController = UINavigationController(rootViewController: currencySelectionViewController)
                 sceneDelegate.window?.rootViewController = navigationController
-                //currencySelectionViewController.currencyArray = CoinManager.currencyArray
+                currencySelectionViewController.coinManager = coinManager
             }
         }
     }

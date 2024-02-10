@@ -11,14 +11,10 @@ import KeychainSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         //to register for remote notifications to be able to receive from server
         UNUserNotificationCenter.current().delegate = self
             application.registerForRemoteNotifications()
-        
         return true
     }
     
@@ -36,16 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler([.banner, .sound])
     }
     
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
-//        //include code to handle
-//        return
-//    }
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle taps on the notification
         completionHandler()
     }
-    
 
     // MARK: UISceneSession Lifecycle
 

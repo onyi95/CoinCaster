@@ -9,19 +9,13 @@ import Foundation
 import KeychainSwift
 
 var currentPrice: Double?
-var userIdNo: Int!
+var userIdNo: Int?
 
-
-struct CoinManager: CoinManagerProtocol {
-    
-    static let shared = CoinManager() //shared instance
-    
-    //3*. Declaring a property for the delegate created above, so that it can be used within the struct
-    var delegate: PriceUpdaterDelegate?
-    
-    let currencyArray = ["AUD","BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
-    let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC"
-    let apiKey = "763B4CBF-261D-47FD-B510-242F8BFC1784"
+class CoinManager: CoinManagerProtocol {
+    weak var delegate: PriceUpdaterDelegate?
+    var currencyArray: [String] = ["AUD","BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
+    let baseURL = API.baseURL
+    let apiKey = API.apiKey
     
     func updateCoinPrice(_ currency: String) {
         let fullString = "\(baseURL)/\(currency)/?apikey=\(apiKey)"
@@ -29,26 +23,24 @@ struct CoinManager: CoinManagerProtocol {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil {
-                    delegate?.didFailWithError(error: error!) // using the delegate methods to handle the errors
+                    self.delegate?.didFailWithError(error: error!) // using the delegate methods to handle the errors
                     // print(error!)
                     return
                 }
                 
                 if let safeData = data {
-                    if let bitcoinPrice = parseJSON(coinData: safeData){
+                    if let bitcoinPrice = self.parseJSON(coinData: safeData){
                         
-                        currentPrice = bitcoinPrice  //Assigning the parsed bitcoinprice to currentPrice, to use within sendTargetPriceToServer func
+                        currentPrice = bitcoinPrice  //Assigning the parsed bitcoinprice to currentPrice, to use within sendTargetPriceToServer
                         
                         let priceString = String(format: "%.2f", bitcoinPrice)
                         
                         self.delegate?.didUpdatePrice(price: priceString, currency: currency) // Here we pass the price and currency in, so that the main thread can be updated.
-                        
                     }
                 }
             }
             task.resume()
         }
-        
     }
     
     func parseJSON(coinData: Data) -> Double? {
@@ -207,7 +199,7 @@ struct CoinManager: CoinManagerProtocol {
         }
     }
     //MARK: - Send Device Token to Server
-    func sendDeviceTokenToServer(token: String, userId: String) {
+    private func sendDeviceTokenToServer(token: String, userId: String) {
         let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_token")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

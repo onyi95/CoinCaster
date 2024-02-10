@@ -8,9 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -21,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //To maintain a user's logged-in state even after closing the app
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if UserSessionManager.shared.isUserLoggedIn() {
-                    let mainViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController")
-                    let navigationController = UINavigationController(rootViewController: mainViewController)
+                    let CurrencySelectionViewController = storyboard.instantiateViewController(withIdentifier: "CurrencySelectionViewController")
+                    let navigationController = UINavigationController(rootViewController: CurrencySelectionViewController)
                         // Set the navigation controller as the root view controller
                     window?.rootViewController = navigationController
                 } else {
