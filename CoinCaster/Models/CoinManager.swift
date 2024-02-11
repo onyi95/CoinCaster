@@ -16,6 +16,8 @@ class CoinManager: CoinManagerProtocol {
     var currencyArray: [String] = ["AUD","BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
     let baseURL = API.baseURL
     let apiKey = API.apiKey
+
+//MARK: - Update Bitcoin Price
     
     func updateCoinPrice(_ currency: String) {
         let fullString = "\(baseURL)/\(currency)/?apikey=\(apiKey)"
@@ -54,7 +56,7 @@ class CoinManager: CoinManagerProtocol {
             return nil
         }
     }
-    
+//MARK: - User Registration
     func registerUser(email: String, password: String, completion: @escaping (Result<Int, RegistrationError>) -> Void) {
         let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/register_user")!
         var request = URLRequest(url: url)
@@ -126,7 +128,7 @@ class CoinManager: CoinManagerProtocol {
         }
         
     }
-    
+//MARK: - User Login Authentication
     func loginUser(email: String, password: String, completion: @escaping (Result<Int, LoginError>) -> Void) {
         let url = URL(string: "https://protected-scrubland-77734-07d1a0d3b8b2.herokuapp.com/login")!
         var request = URLRequest(url: url)

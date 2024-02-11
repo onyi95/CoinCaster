@@ -107,7 +107,7 @@ extension CurrencySelectionViewController {
         coinManager.logoutUser(withUserId: user_id) { [weak self] success in
             DispatchQueue.main.async {
                 if success {
-                    self?.clearUserDataAndNavigateToWelcomeScreen()
+                    self?.clearUserDataAndNavigateToAuthOptionsScreen()
                 } else {
                     print("Couldn't log out. Try again")
                 }
@@ -115,7 +115,7 @@ extension CurrencySelectionViewController {
         }
     }
     
-    private func clearUserDataAndNavigateToWelcomeScreen() {
+    private func clearUserDataAndNavigateToAuthOptionsScreen() {
         // Clear user-specific information
         KeychainSwift().delete("token")
         KeychainSwift().delete("userId")
@@ -123,10 +123,10 @@ extension CurrencySelectionViewController {
         //clear logged in state on device
         UserSessionManager.shared.logout()
         
-        //Navigate back to the welcome screen
+        //Navigate back to the AuthOptions screen
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
-           let welcomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController {
-            sceneDelegate.window?.rootViewController = welcomeViewController
+           let authOptionsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AuthOptionsViewController") as? AuthOptionsViewController {
+            sceneDelegate.window?.rootViewController = authOptionsViewController
         }
     }
 }

@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		AA0AAAAD2B45CBA000A4CC59 /* PriceAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */; };
+		AA1E37222B78F3A000FC983E /* WelcomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E37212B78F3A000FC983E /* WelcomeViewControllerTests.swift */; };
+		AA1E37242B79464B00FC983E /* CoinManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E37232B79464B00FC983E /* CoinManagerTests.swift */; };
 		AA27D60C2B4448F600453A29 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27D60B2B4448F600453A29 /* CoinManager.swift */; };
 		AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27D60F2B447B6E00453A29 /* CoinData.swift */; };
-		AA559C5C2B5D3F7A00D5C432 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5B2B5D3F7A00D5C432 /* WelcomeViewController.swift */; };
+		AA559C5C2B5D3F7A00D5C432 /* AuthOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5B2B5D3F7A00D5C432 /* AuthOptionsViewController.swift */; };
 		AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */; };
 		AA559C602B5D43B200D5C432 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */; };
 		AA559C622B63E29100D5C432 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C612B63E29100D5C432 /* Constants.swift */; };
@@ -25,6 +27,7 @@
 		AA996D9C2B756F60002876EC /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA996D9B2B756F60002876EC /* Navigator.swift */; };
 		AA996DA42B770E70002876EC /* RegistrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA996DA32B770E70002876EC /* RegistrationError.swift */; };
 		AA996DA62B770EA3002876EC /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA996DA52B770EA3002876EC /* LoginError.swift */; };
+		AA996DAB2B77AFC6002876EC /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA996DAA2B77AFC6002876EC /* WelcomeViewController.swift */; };
 		AAC2F6492B433F4500D3727B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F6482B433F4500D3727B /* AppDelegate.swift */; };
 		AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */; };
 		AAC2F64D2B433F4500D3727B /* CurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2F64C2B433F4500D3727B /* CurrencySelectionViewController.swift */; };
@@ -47,10 +50,12 @@
 /* Begin PBXFileReference section */
 		58600E4A929F0FE410563F7C /* Pods_CoinCaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoinCaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceAlertViewController.swift; sourceTree = "<group>"; };
+		AA1E37212B78F3A000FC983E /* WelcomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewControllerTests.swift; sourceTree = "<group>"; };
+		AA1E37232B79464B00FC983E /* CoinManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManagerTests.swift; sourceTree = "<group>"; };
 		AA27D60B2B4448F600453A29 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
 		AA27D60F2B447B6E00453A29 /* CoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinData.swift; sourceTree = "<group>"; };
 		AA559C5A2B4F584D00D5C432 /* CoinCaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoinCaster.entitlements; sourceTree = "<group>"; };
-		AA559C5B2B5D3F7A00D5C432 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		AA559C5B2B5D3F7A00D5C432 /* AuthOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthOptionsViewController.swift; sourceTree = "<group>"; };
 		AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AA559C612B63E29100D5C432 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -66,6 +71,7 @@
 		AA996D9B2B756F60002876EC /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		AA996DA32B770E70002876EC /* RegistrationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationError.swift; sourceTree = "<group>"; };
 		AA996DA52B770EA3002876EC /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		AA996DAA2B77AFC6002876EC /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AAC2F6452B433F4500D3727B /* CoinCaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinCaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC2F6482B433F4500D3727B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAC2F64A2B433F4500D3727B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +106,8 @@
 		AA0AAAA92B45949E00A4CC59 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AA559C5B2B5D3F7A00D5C432 /* WelcomeViewController.swift */,
+				AA996DAA2B77AFC6002876EC /* WelcomeViewController.swift */,
+				AA559C5B2B5D3F7A00D5C432 /* AuthOptionsViewController.swift */,
 				AA559C5D2B5D42C900D5C432 /* RegistrationViewController.swift */,
 				AA559C5F2B5D43B200D5C432 /* LoginViewController.swift */,
 				AAC2F64C2B433F4500D3727B /* CurrencySelectionViewController.swift */,
@@ -130,10 +137,12 @@
 			isa = PBXGroup;
 			children = (
 				AA636F2B2B71579400828A62 /* MockCoinManager.swift */,
+				AA1E37212B78F3A000FC983E /* WelcomeViewControllerTests.swift */,
 				AA636F2D2B715FB200828A62 /* RegistrationViewControllerTests.swift */,
 				AA636F2F2B72620200828A62 /* LoginViewControllerTests.swift */,
 				AA636F332B72C2C800828A62 /* CurrencySelectionViewControllerTests.swift */,
 				AA636F352B72FFC800828A62 /* PriceAlertViewControllerTests.swift */,
+				AA1E37232B79464B00FC983E /* CoinManagerTests.swift */,
 			);
 			path = CoinCasterTests;
 			sourceTree = "<group>";
@@ -363,7 +372,9 @@
 				AA636F362B72FFC800828A62 /* PriceAlertViewControllerTests.swift in Sources */,
 				AA636F302B72620200828A62 /* LoginViewControllerTests.swift in Sources */,
 				AA636F2C2B71579400828A62 /* MockCoinManager.swift in Sources */,
+				AA1E37222B78F3A000FC983E /* WelcomeViewControllerTests.swift in Sources */,
 				AA636F2E2B715FB200828A62 /* RegistrationViewControllerTests.swift in Sources */,
+				AA1E37242B79464B00FC983E /* CoinManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +387,7 @@
 				AAC2F64D2B433F4500D3727B /* CurrencySelectionViewController.swift in Sources */,
 				AA636F322B726A9C00828A62 /* Protocols.swift in Sources */,
 				AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */,
+				AA996DAB2B77AFC6002876EC /* WelcomeViewController.swift in Sources */,
 				AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */,
 				AA559C622B63E29100D5C432 /* Constants.swift in Sources */,
 				AA996D9C2B756F60002876EC /* Navigator.swift in Sources */,
@@ -386,7 +398,7 @@
 				AAC2F64B2B433F4500D3727B /* SceneDelegate.swift in Sources */,
 				AA0AAAAD2B45CBA000A4CC59 /* PriceAlertViewController.swift in Sources */,
 				AA996DA62B770EA3002876EC /* LoginError.swift in Sources */,
-				AA559C5C2B5D3F7A00D5C432 /* WelcomeViewController.swift in Sources */,
+				AA559C5C2B5D3F7A00D5C432 /* AuthOptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

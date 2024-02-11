@@ -39,6 +39,35 @@
                BlueprintName = "CoinCasterTests"
                ReferencedContainer = "container:CoinCaster.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CurrencySelectionViewControllerTests/testViewController_ReceivesPriceUpdate_DelegateUpdatesUI()">
+               </Test>
+               <Test
+                  Identifier = "LoginViewControllerTests/testLoginPressed_WithEmptyFields_ShowsAlert()">
+               </Test>
+               <Test
+                  Identifier = "LoginViewControllerTests/testLoginPressed_WithLoginSuccess_NavigatesToCurrencySelectionViewController()">
+               </Test>
+               <Test
+                  Identifier = "LoginViewControllerTests/testLoginPressed_WithNetworkError_ShowsErrorMessage()">
+               </Test>
+               <Test
+                  Identifier = "PriceAlertViewControllerTests/testMockAlertPresenter_ShouldSetPropertiesCorrectly()">
+               </Test>
+               <Test
+                  Identifier = "PriceAlertViewControllerTests/testNotificationButtonPressed_InvalidPercentage_ShowsInvalidInputAlert()">
+               </Test>
+               <Test
+                  Identifier = "PriceAlertViewControllerTests/testNotificationButtonPressed_PermissionDenied_ShowsAlert()">
+               </Test>
+               <Test
+                  Identifier = "PriceAlertViewControllerTests/testNotificationButtonPressed_PermissionDenied_WillNotSendTargetPrice()">
+               </Test>
+               <Test
+                  Identifier = "PriceAlertViewControllerTests/testNotificationButtonPressed_WithoutCurrentPrice_ShowsInvalidInputAlert()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

@@ -44,106 +44,106 @@ final class RegistrationViewControllerTests: XCTestCase {
     }
 
     func testRegisterUser_WithValidInput_CallsRegisterUserOnCoinManager() {
-        //Given
+        //Arrange
         let expectedEmail = "test@example.com"
         let expectedPassword = "password123"
         
         mockCoinManager.registerCompletionResult = .success(201)
         
-        //When
+        //Act
         sut.emailTextField.text = expectedEmail
         sut.passwordTextField.text = expectedPassword
         sut.retypePasswordTextField.text = expectedPassword
         sut.registerButtonPressed(UIButton())
         
-        //Then
+        //Assert
         XCTAssertTrue(mockCoinManager.registerUserCalled, "registerUser was not called on the coinManager")
         XCTAssertEqual(mockCoinManager.passedEmail, expectedEmail,"Passed email is not correct")
         XCTAssertEqual(mockCoinManager.passedPassword, expectedPassword, "Passed password is not correct")
     }
     
     func testRegisterUser_WithEmptyFields_DoesNotCallRegisterUser() {
-        //Given
+        //Arrange
         sut.emailTextField.text = ""
         sut.passwordTextField.text = ""
         sut.retypePasswordTextField.text = ""
         
-        //When
+        //Act
         sut.registerButtonPressed(UIButton())
         
-        //Then
+        //Assert
         XCTAssertFalse(mockCoinManager.registerUserCalled, "registerUser should not be called when any field is empty.")
     }
     
     func testRegisterUser_WithPasswordMismatch_DoesNotCallRegisterUser() {
-        //Given
+        //Arrange
         sut.emailTextField.text = "test@example.com"
         sut.passwordTextField.text = "pasword123"
         sut.retypePasswordTextField.text = "123456"
         
-        //When
+        //Act
         sut.registerButtonPressed(UIButton())
         
-        //Then
+        //Assert
         XCTAssertFalse(mockCoinManager.registerUserCalled, "registerUser should not be called when passwords do not match.")
     }
     
     func testRegisterUser_WhenEmailAlreadyInUse_HandlesErrorCorrectly() {
-        //Given
+        //Arrange
         sut.emailTextField.text = "test@case.com"
         sut.passwordTextField.text = "password789"
         sut.retypePasswordTextField.text = "password123"
         mockCoinManager.registerCompletionResult = .failure(.emailAlreadyInUse)
         
-        //When
+        //Act
         sut.registerButtonPressed(UIButton())
         
-        //Then
+        //Assert
         XCTAssertFalse(mockCoinManager.registerUserCalled, "registerUser should not be called when the email provided is already in use.")
     }
     
 
     func test_handleRegistrationError_NetworkError_ShowsCorrectErrorMessage() {
-        //Given
+        //Arrange
         let error: RegistrationError = .networkError("Network connection lost")
         
-        //When
+        //Act
         sut.handleRegistrationError(error)
         
-        //Then
+        //Assert
         XCTAssertEqual(sut.errorMessage(for: error), "Network connection lost")
     }
 
     func test_handleRegistrationError_EmailAlreadyInUse_ShowsCorrectErrorMessage() {
-        //Given
+        //Arrange
         let error: RegistrationError = .emailAlreadyInUse
         
-        //When
+        //Act
         sut.handleRegistrationError(error)
         
-        //Then
+        //Assert
         XCTAssertEqual(sut.errorMessage(for: error), "Email already in use. Please log in.")
     }
 
     func test_handleRegistrationError_OtherError_ShowsCorrectErrorMessage() {
-        //Given
+        //Arrange
         let error: RegistrationError = .other(0)
         
-        //When
+        //Act
         sut.handleRegistrationError(error)
         
-        //Then
+        //Assert
         XCTAssertEqual(sut.errorMessage(for: error), "Failed to register user. Please try again.")
     }
 
     func test_handleRegistrationError_NoDataError_ShowsCorrectErrorMessage() {
-        //Given
+        //Arrange
         let error: RegistrationError = .noData
 
-        //When
+        //Act
         sut.handleRegistrationError(error)
         
-        //Then
+        //Assert
         XCTAssertEqual(sut.errorMessage(for: error), "Failed to Register user. Please try again.")
     }
 
