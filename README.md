@@ -1,16 +1,16 @@
 CoinCaster: A Cryptocurrency Price Alert App
 
+Introduction
+
+CoinCaster is a project born from my interest in software development and a personal challenge to enhance my skills in iOS and backend technologies. By developing this cryptocurrency price alert app, I aimed to dive deeper into Swift, Flask, and the mechanics of real-time data processing and notifications. It’s a demonstration of my ability to create a functional, user-oriented application, reflecting my journey in mastering these technologies.
+This project is a comprehensive iOS application designed to notify users when Bitcoin reaches a specified target price. Built with Swift and leveraging the iOS SDK, the app integrates a Flask backend to manage user registrations, login sessions, and target price alerts. The application showcases robust Object-Oriented Programming (OOP) practices, API design, multithreading for asynchronous tasks, and effective mobile memory management.
+
 <p float="left">
   <img src="/Screenshots/WelcomeScreen.png" width="100" />
   <img src="/Screenshots/CurrencySelection.png" width="100" />
   <img src="/Screenshots/SetPriceTarget.png" width="100" />
  <img src="/Screenshots/Incoming Price Alert.png" width="100" />
 </p>
-
-Introduction
-
-CoinCaster is a project born from my interest in software development and a personal challenge to enhance my skills in iOS and backend technologies. By developing this cryptocurrency price alert app, I aimed to dive deeper into Swift, Flask, and the mechanics of real-time data processing and notifications. It’s a demonstration of my ability to create a functional, user-oriented application, reflecting my journey in mastering these technologies.
-This project is a comprehensive iOS application designed to notify users when Bitcoin reaches a specified target price. Built with Swift and leveraging the iOS SDK, the app integrates a Flask backend to manage user registrations, login sessions, and target price alerts. The application showcases robust Object-Oriented Programming (OOP) practices, API design, multithreading for asynchronous tasks, and effective mobile memory management.
 
 Features
 * User Authentication: Supports user registration and login, ensuring secure access to the app.
