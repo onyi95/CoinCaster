@@ -53,14 +53,32 @@ class PriceAlertViewController: UIViewController, UITextFieldDelegate {
             alertPresenter.showAlert(withTitle: "Invalid", message: "Please select currency and enter a valid percentage.", onDismiss: nil)
             return
         }
+        
+        if percentage <= 0 {
+            alertPresenter.showAlert(withTitle: "Invalid Input", message: "The percentage value must be greater than 0.", onDismiss: nil)
+            return
+        }
 
         let targetPrice = calculateTargetPrice(percentage: percentage, basedOn: currentPrice)
-        coinManager.sendTargetPriceToServer(targetPrice: targetPrice)
+        coinManager.sendTargetPriceToServer(targetPrice: targetPrice) { success in
+            if success{
+                print("Success")
+            } else {
+                print("Failed")
+            }
+        }
         print(targetPrice)
         
         if let currency = recievedUserCurrency {
             //print(currency)
-            coinManager.userSelectedCurrency(currency: currency)
+            coinManager.userSelectedCurrency(currency: currency) { success in
+                if success {
+                    print("Selected currency sent successfully")
+
+                } else {
+                    print("Failed to send Selected currency")
+                }
+            }
         }
         checkForPermission()
     }

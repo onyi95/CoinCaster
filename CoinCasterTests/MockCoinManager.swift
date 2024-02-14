@@ -24,7 +24,7 @@ class MockCoinManager: CoinManagerProtocol {
     var sendTargetPriceCalled = false
     var targetPriceSent: Double?
     var selectedCurrency: String?
-    
+ 
     func registerUser(email: String, password: String, completion: @escaping (Result<Int, CoinCaster.RegistrationError>) -> Void) {
         registerUserCalled = true
         passedEmail = email
@@ -47,12 +47,12 @@ class MockCoinManager: CoinManagerProtocol {
         delegate?.didUpdatePrice(price: "12345", currency: currency)
     }
     
-    func sendTargetPriceToServer(targetPrice: Double) {
+    func sendTargetPriceToServer(targetPrice: Double, completion: @escaping (Bool) -> Void) {
         sendTargetPriceCalled = true
         targetPriceSent = targetPrice
     }
     
-    func userSelectedCurrency(currency: String) {
+    func userSelectedCurrency(currency: String, completion: @escaping (Bool) -> Void) {
         selectedCurrency = currency
     }
     
@@ -74,37 +74,92 @@ class MockAlertPresenter: AlertPresenterProtocol {
     }
 }
     
-    class MockNavigator: NavigatorProtocol {
-        var navigateToCurrencySelectionViewControllerCalled = false
+class MockNavigator: NavigatorProtocol {
+    var navigateToCurrencySelectionViewControllerCalled = false
         
-        func navigateToCurrencySelectionViewController() {
-            navigateToCurrencySelectionViewControllerCalled = true
-        }
+    func navigateToCurrencySelectionViewController() {
+        navigateToCurrencySelectionViewControllerCalled = true
+    }
+}
+    
+class MockPriceUpdaterDelegate: PriceUpdaterDelegate {
+    var didUpdatePriceCalled = false
+    var didFailWithErrorCalled = false
+    var lastPrice: String?
+    var lastCurrency: String?
+    var errorReceived: Error?
+    var updatePriceCompletion: ((String, String) -> Void)?
+    var failureCompletion: ((Error) -> Void)?
+        
+    func didUpdatePrice(price: String, currency: String) {
+        didUpdatePriceCalled = true
+        lastPrice = price
+        lastCurrency = currency
+        // Call the completion handler when the delegate method is triggered
+        updatePriceCompletion?(price, currency)
+        //failureCompletion:
+        
+    }
+        
+    func didFailWithError(error: Error) {
+        didFailWithErrorCalled = true
+        errorReceived = error
+    }
+}
+    
+class MockNotificationCenter: NotificationCenterProtocol {
+    var permissionGranted: Bool?
+        
+    func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
+        completionHandler(permissionGranted ?? false, nil)  // Simulate authorization granted
+    }
+}
+
+class MockURLSession: URLSessionProtocol {
+    var lastURL: URL?
+    private let mockTask: MockTask
+    var nextData: Data?
+    var nextResponse: URLResponse?
+    var nextError: Error?
+    var lastRequest: URLRequest?
+    var completionHandler: ((Data?, URLResponse?, Error?) -> Void)?
+    
+    init(data: Data?, urlResponse: URLResponse?, error: Error?) {
+        mockTask = MockTask(data: data, urlResponse: urlResponse, error: error)
+        self.nextData = data
+        self.nextResponse = urlResponse
+        self.nextError = error
     }
     
-    class MockPriceUpdaterDelegate: PriceUpdaterDelegate {
-        var didUpdatePriceCalled = false
-        var lastPrice: String?
-        var lastCurrency: String?
-        var errorReceived: Error?
-        
-        func didUpdatePrice(price: String, currency: String) {
-            didUpdatePriceCalled = true
-            lastPrice = price
-            lastCurrency = currency
-        }
-        
-        func didFailWithError(error: Error) {
-            errorReceived = error
-        }
+    func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> CoinCaster.URLSessionDataTaskProtocol {
+         lastURL = request.url
+         lastRequest = request
+         mockTask.completionHandler = completionHandler
+         return mockTask
     }
     
-    class MockNotificationCenter: NotificationCenterProtocol {
-        var permissionGranted: Bool?
-        
-        func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
-            completionHandler(permissionGranted ?? false, nil)  // Simulate authorization granted
-        }
+    func triggerCompletion(data: Data?, response: URLResponse?, error: Error?) {
+        completionHandler?(data, response, error)
     }
+}
+
+class MockTask: URLSessionDataTaskProtocol {
+        private let data: Data?
+        private let urlResponse: URLResponse?
+        private let mockError: Error?
+        
+        var completionHandler: ((Data?, URLResponse?, Error?) -> Void)?
+        
+        init(data: Data?, urlResponse: URLResponse?, error: Error?) {
+            self.data = data
+            self.urlResponse = urlResponse
+            self.mockError = error
+        }
+        
+        func resume() {
+            completionHandler?(data, urlResponse, mockError)
+        }
+}
+
     
 

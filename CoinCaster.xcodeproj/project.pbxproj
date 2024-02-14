@@ -10,6 +10,7 @@
 		AA0AAAAD2B45CBA000A4CC59 /* PriceAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */; };
 		AA1E37222B78F3A000FC983E /* WelcomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E37212B78F3A000FC983E /* WelcomeViewControllerTests.swift */; };
 		AA1E37242B79464B00FC983E /* CoinManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E37232B79464B00FC983E /* CoinManagerTests.swift */; };
+		AA1E37262B7954E900FC983E /* URLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E37252B7954E900FC983E /* URLSessionExtensions.swift */; };
 		AA27D60C2B4448F600453A29 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27D60B2B4448F600453A29 /* CoinManager.swift */; };
 		AA27D6102B447B6E00453A29 /* CoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27D60F2B447B6E00453A29 /* CoinData.swift */; };
 		AA559C5C2B5D3F7A00D5C432 /* AuthOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA559C5B2B5D3F7A00D5C432 /* AuthOptionsViewController.swift */; };
@@ -52,6 +53,7 @@
 		AA0AAAAC2B45CBA000A4CC59 /* PriceAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceAlertViewController.swift; sourceTree = "<group>"; };
 		AA1E37212B78F3A000FC983E /* WelcomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewControllerTests.swift; sourceTree = "<group>"; };
 		AA1E37232B79464B00FC983E /* CoinManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManagerTests.swift; sourceTree = "<group>"; };
+		AA1E37252B7954E900FC983E /* URLSessionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtensions.swift; sourceTree = "<group>"; };
 		AA27D60B2B4448F600453A29 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
 		AA27D60F2B447B6E00453A29 /* CoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinData.swift; sourceTree = "<group>"; };
 		AA559C5A2B4F584D00D5C432 /* CoinCaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoinCaster.entitlements; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				AA559C632B6A51C400D5C432 /* UserSessionManager.swift */,
 				AA636F3B2B74712600828A62 /* AlertPresenter.swift */,
 				AA996D9B2B756F60002876EC /* Navigator.swift */,
+				AA1E37252B7954E900FC983E /* URLSessionExtensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 			files = (
 				AA559C602B5D43B200D5C432 /* LoginViewController.swift in Sources */,
 				AA27D60C2B4448F600453A29 /* CoinManager.swift in Sources */,
+				AA1E37262B7954E900FC983E /* URLSessionExtensions.swift in Sources */,
 				AAC2F64D2B433F4500D3727B /* CurrencySelectionViewController.swift in Sources */,
 				AA636F322B726A9C00828A62 /* Protocols.swift in Sources */,
 				AA559C5E2B5D42C900D5C432 /* RegistrationViewController.swift in Sources */,

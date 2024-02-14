@@ -115,6 +115,7 @@ final class PriceAlertViewControllerTests: XCTestCase {
         sut.currentPrice = 100.0
         sut.percentageTextField.text = "10"
         mockNotificationCenter.permissionGranted = false
+        
 
         // Act
         sut.notificationButtonPressed(UIButton())

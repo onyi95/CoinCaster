@@ -21,8 +21,8 @@ protocol CoinManagerProtocol: AnyObject  {
     func registerUser(email: String, password: String, completion : @escaping (Result<Int, RegistrationError>) -> Void)
     func loginUser(email: String, password: String, completion: @escaping (Result<Int, LoginError>) -> Void)
     func logoutUser(withUserId userId: String, completion: @escaping (Bool) -> Void)
-    func sendTargetPriceToServer(targetPrice: Double)
-    func userSelectedCurrency(currency: String)
+    func sendTargetPriceToServer(targetPrice: Double, completion: @escaping (Bool) -> Void)
+    func userSelectedCurrency(currency: String, completion: @escaping (Bool) -> Void)
     var currencyArray: [String] {get}
     var delegate: PriceUpdaterDelegate? { get set }
 }
@@ -39,3 +39,16 @@ protocol NotificationCenterProtocol {
 protocol GetCurrencyProtocol {
     var currencyArray: [String] {get}
 }
+
+// decouple networking code from URLSession directly to enable mock network calls in unit tests without making actual HTTP requests.
+protocol URLSessionDataTaskProtocol {
+    func resume()
+}
+
+protocol URLSessionProtocol {
+    func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol
+    
+    typealias DataTaskResult = (Data?, URLResponse?, Error?) -> Void
+
+}
+
